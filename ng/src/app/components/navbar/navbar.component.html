@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink="/home">
+        <img src="assets/images/tux-nerd.svg" width="30" height="40" alt="Logo">
+        Course Management System
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/students/all" routerLinkActive="active">
+                    <i class="fa fa-graduation-cap"></i>
+                    Students
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/courses/all" routerLinkActive="active">
+                    <i class="fa fa-book"></i>
+                    Courses
+                </a>
+            </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+            <div *ngIf="user">
+                <a role="button" class="btn btn-outline-dark" routerLink="/profile" routerLinkActive="active">
+                    <i class="fa fa-user-circle"></i>
+                    My Profile
+                </a>
+                <button role="button" class="btn btn-outline-danger" (click)="logout()">
+                    <i class="fa fa-sign-out"></i>
+                    Logout
+                </button>
+            </div>
+
+            <div *ngIf="!user">
+                <a role="button" class="btn btn-outline-primary" routerLink="/login" routerLinkActive="active">
+                    <i class="fa fa-sign-in"></i>
+                    Login
+                </a>
+                <a role="button" class="btn btn-outline-success" routerLink="/register" routerLinkActive="active">
+                    <i class="fa fa-user-plus"></i>
+                    Register
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</nav>

@@ -1,0 +1,32 @@
+<div class="mx-auto mt-5 p-3 border rounded col-xs-10 col-sm-8 col-md-6 col-lg-4 col-xl-4">
+    <div class="container-fluid">
+        <div class="row">
+            <form class="container-fluid" #loginForm="ngForm" (submit)="login()">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input class="form-control" type="email" name="username" id="username" required
+                           [(ngModel)]="loginModel.username">
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input class="form-control" type="password" name="password" id="password" required minlength="6"
+                           [(ngModel)]="loginModel.password">
+                </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary"
+                            [disabled]="isSending || loginForm.form.invalid">
+                        <i class="fa fa-sign-in"></i>
+                        Login
+                    </button>
+                </div>
+            </form>
+
+            <div *ngIf="error">
+                <div class="alert alert-danger">
+                    <p>{{ error }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

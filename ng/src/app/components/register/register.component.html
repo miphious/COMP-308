@@ -1,0 +1,72 @@
+<form [formGroup]="studentForm" (ngSubmit)="registerStudent()">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="e.g. John" formControlName="firstName">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="e.g. Smith" formControlName="lastName">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="e.g. john.smith@example.com"
+                   formControlName="email">
+        </div>
+    </div>
+
+    <div class="form-row" formGroupName="passwords">
+        <div class="form-group col-md-6">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="passwordConfirm">Confirm Password</label>
+            <input type="password" class="form-control" id="passwordConfirm" formControlName="passwordConfirm">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="studentId">Student ID</label>
+            <input type="text" class="form-control" id="studentId" placeholder="e.g. 300 123 456"
+                   formControlName="studentNumber">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="program">Program</label>
+            <input type="text" class="form-control" id="program" placeholder="e.g. Software Engineering"
+                   formControlName="program">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" id="phone" placeholder="e.g. 647 123 456" formControlName="phone">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address" placeholder="e.g. 123 Main St."
+                   formControlName="address">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" placeholder="e.g. Toronto" formControlName="city">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-outline-success pull-right"
+            [disabled]="isSending || studentForm.pristine || studentForm.invalid">
+        <i class="fa fa-user-plus"></i>
+        Register
+    </button>
+</form>
+
+<div class="row text-center">
+    <div class="alert alert-danger" *ngIf="error">
+        Operation Failed!
+        <br/>
+        <p> {{ error }} </p>
+    </div>
+</div>
