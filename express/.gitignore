@@ -75,3 +75,8 @@ typings/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Grunt TypeScript jobs
+.tscache
+.baseDir.ts
+dist

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
-import {getErrorMessage} from '../../helpers/helpers';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { getErrorMessage } from '../../helpers/helpers';
 
 @Component({
     selector: 'app-login',
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         this._authService
             .login(this.loginModel)
             .subscribe(
-                _ => {
+                () => {
                     this._router.navigate([this._returnUrl || '/home']);
                 },
                 e => {

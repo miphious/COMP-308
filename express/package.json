@@ -8,6 +8,7 @@
         "start": "node bin/www",
         "build": "npm run tsc -- --watch false",
         "build:watch": "npm run tsc -- --watch true",
+        "build:prod": "npm run tsc -- --watch false --sourceMap false",
         "tsc": "node node_modules/typescript/bin/tsc",
         "nodemon": "node node_modules/nodemon/bin/nodemon.js"
     },
