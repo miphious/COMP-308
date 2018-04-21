@@ -1,11 +1,11 @@
 {
-    "name": "comp308-assignment3-express",
+    "name": "comp308-express",
     "version": "1.0.0",
-    "main": "bin/www",
+    "main": "bin/www.js",
     "private": true,
     "scripts": {
-        "prestart": "npm run build",
-        "start": "node bin/www",
+        "heroku-postbuild": "node build.js",
+        "start": "node bin/www.js",
         "build": "npm run tsc -- --watch false",
         "build:watch": "npm run tsc -- --watch true",
         "build:prod": "npm run tsc -- --watch false --sourceMap false",
@@ -33,6 +33,7 @@
         "@types/passport": "^0.4.3",
         "@types/passport-local": "^1.0.32",
         "nodemon": "^1.17.3",
+        "shelljs": "^0.8.1",
         "tslint": "^5.9.1",
         "typescript": "^2.7.2"
     }
