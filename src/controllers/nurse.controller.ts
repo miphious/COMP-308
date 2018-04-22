@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import { IUserModel, getModelUser } from '../models/user.model';
-import { ICourseModel, getModelCourse } from '../models/course.model';
 import { ApiError } from '../models/api-error';
 
 export class NurseController {

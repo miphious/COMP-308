@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { IUserModel, getModelUser } from '../models/user.model';
-import { getModelCourse, ICourseModel } from '../models/course.model';
+import { getModelExamination, IExaminationModel } from '../models/examination.model';
 import { ApiError } from '../models/api-error';
 
 export class ClinicController {
@@ -47,58 +47,49 @@ export class ClinicController {
         res.send();
     }
 
-    public static async unregisterPatient(req: Request, res: Response, next: NextFunction) {
-        // ToDo
-        /*
-        const studentId: string = req.body.student;
-        const courseId: string = req.body.course;
-
-        const Student = getModelUser();
-        const Course = getModelCourse();
-
-        let student: IUserModel;
-        let course: ICourseModel;
+    public static async getAllExaminations(req: Request, res: Response, next: NextFunction) {
+        const Examination = getModelExamination();
+        let exams: IExaminationModel[];
 
         try {
-            student = await Student.findById(studentId);
+            exams = await Examination.find({}, { __v: 0 });
         } catch (e) {
             return next(e);
         }
-        if (!student) {
-            res.status(404);
-            res.send(new ApiError('User not found'));
-            return;
-        }
 
+        res.json(exams.map(s => s.toDTO()));
+    }
+
+    public static async addExamination(req: Request, res: Response, next: NextFunction) {
+        const User = getModelUser();
+
+        let patient: IUserModel;
         try {
-            course = await Course.findById(courseId);
+            patient = await User.findOne({ _id: req.body.patient, role: 'patient' });
         } catch (e) {
             return next(e);
         }
-        if (!course) {
+        if (!patient) {
             res.status(404);
-            res.send(new ApiError('Course not found'));
+            res.send(new ApiError('Patient not found'));
             return;
         }
 
-        if (
-            student.courses.every(crsId => crsId.toString() !== courseId) ||
-            course.students.every(stdId => stdId.toString() !== studentId)
-        ) {
-            res.status(404);
-            res.send(new ApiError('No such registration exists'));
-            return;
-        }
+        const Examination = getModelExamination();
+
+        const reqBody = Object.assign({}, req.body);
+        reqBody.postedAt = new Date();
+        reqBody.postedBy = req.user.id;
+
+        const examination = new Examination(reqBody);
 
         try {
-            await student.update({ $pull: { courses: courseId } });
-            await course.update({ $pull: { students: studentId } });
+            await examination.save();
         } catch (e) {
             return next(e);
         }
 
         res.statusCode = 201;
-        res.send();
-        */
+        return res.json(examination.toDTO());
     }
 }

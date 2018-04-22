@@ -20,7 +20,7 @@ export interface IUserModel extends mongoose.Document {
     toDTO(): any;
 }
 
-export function registerModelStudent() {
+export function registerModelUser() {
     const UserSchema = new mongoose.Schema({
         firstName: {
             type: String,

@@ -8,9 +8,13 @@ export function registerClinicRoutes(router: Router) {
             ensureAuthenticated,
             ClinicController.registerPatient
         )
-        .delete('/api/clinic/register',
+        .get('/api/clinic/examinations',
             ensureAuthenticated,
-            ClinicController.unregisterPatient
+            ClinicController.getAllExaminations
+        )
+        .post('/api/clinic/examinations',
+            ensureAuthenticated,
+            ClinicController.addExamination
         )
         ;
 }
