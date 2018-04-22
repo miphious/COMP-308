@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 import * as crypto from 'crypto';
-// import {CourseModelName} from './course.model';
+// import {CourseModelName} from './course.model'; // ToDo remove
 
 export const UserModelName = 'user';
 
@@ -13,7 +13,7 @@ export interface IUserModel extends mongoose.Document {
     password: string;
     salt: string;
 
-    // courses: mongoose.Schema.Types.ObjectId[];
+    courses: mongoose.Schema.Types.ObjectId[]; // ToDo remove
 
     hashPassword(password: string): string;
 

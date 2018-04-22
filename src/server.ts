@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
@@ -10,10 +10,10 @@ import { loadAppConfigurations } from './config/app-config';
 import { configureMongoose } from './config/mongoose';
 import { configurePassport } from './config/passport';
 import { registerAuthRoutes } from './routes/auth.route';
-import { registerStudentRoutes } from './routes/student.route';
+import { registerNurseRoutes } from './routes/nurse.route';
 import { registerCourseRoutes } from './routes/course.route';
 import { registerCourseRegistrationRoutes } from './routes/course-registration.route';
-import { ApiError } from "./models/api-error";
+import { ApiError } from './models/api-error';
 
 // noinspection JSUnusedGlobalSymbols
 export class Server {
@@ -59,7 +59,7 @@ export class Server {
         this.app.use(passport.initialize());
         this.app.use(passport.session());
 
-        this.app.use(express.static(__dirname + '/public', {dotfiles: 'ignore'}))
+        this.app.use(express.static(__dirname + '/public', {dotfiles: 'ignore'}));
     }
 
     private async registerRoutes() {
@@ -68,7 +68,7 @@ export class Server {
         });
 
         registerAuthRoutes(router);
-        registerStudentRoutes(router);
+        registerNurseRoutes(router);
         registerCourseRoutes(router);
         registerCourseRegistrationRoutes(router);
 

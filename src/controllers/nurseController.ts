@@ -3,7 +3,7 @@ import {IUserModel, getModelUser} from '../models/user.model';
 import {ICourseModel, getModelCourse} from '../models/course.model';
 import {ApiError} from '../models/api-error';
 
-export class StudentController {
+export class NurseController {
 
     public static async getAll(req: Request, res: Response, next: NextFunction) {
         const Student = getModelUser();
@@ -46,7 +46,7 @@ export class StudentController {
         res.json(student.toDTO());
     }
 
-    public static async getRegisteredCourses(req: Request, res: Response, next: NextFunction) {
+    public static async getPatients(req: Request, res: Response, next: NextFunction) {
         const studentId: string = req.params.studentId;
 
         const Student = getModelUser();
