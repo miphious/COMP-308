@@ -1,90 +1,95 @@
-import {Request, Response, NextFunction} from 'express';
-import {IUserModel, getModelUser} from '../models/user.model';
-import {ICourseModel, getModelCourse} from '../models/course.model';
-import {ApiError} from '../models/api-error';
+import { Request, Response, NextFunction } from 'express';
+import { IUserModel, getModelUser } from '../models/user.model';
+import { ICourseModel, getModelCourse } from '../models/course.model';
+import { ApiError } from '../models/api-error';
 
 export class NurseController {
 
     public static async getAll(req: Request, res: Response, next: NextFunction) {
-        const Student = getModelUser();
-        let students: IUserModel[];
+        const User = getModelUser();
+        let nurses: IUserModel[];
 
         try {
-            students = await Student.find({}, {
-                salt: 0,
-                password: 0,
-                __v: 0
-            });
+            nurses = await User.find(
+                { role: 'nurse' },
+                {
+                    salt: 0,
+                    password: 0,
+                    __v: 0
+                });
         } catch (e) {
             return next(e);
         }
 
-        res.json(students.map(s => s.toDTO()));
+        res.json(nurses.map(s => s.toDTO()));
     }
 
     public static async getById(req: Request, res: Response, next: NextFunction) {
-        const studentId: string = req.params.studentId;
-        const Student = getModelUser();
-        let student;
+        const nurseId: string = req.params.nurseId;
+        const User = getModelUser();
+        let nurse;
 
         try {
-            student = await Student.findById(studentId, {
-                __v: 0,
-                password: 0,
-                salt: 0
-            });
+            nurse = await User.findById(
+                { _id: nurseId, role: 'nurse' }
+                , {
+                    __v: 0,
+                    password: 0,
+                    salt: 0
+                });
         } catch (e) {
             return next(e);
         }
 
-        if (!student) {
+        if (!nurse) {
             res.status(404);
             res.send(new ApiError('User not found'));
             return;
         }
 
-        res.json(student.toDTO());
+        res.json(nurse.toDTO());
     }
 
     public static async getPatients(req: Request, res: Response, next: NextFunction) {
-        const studentId: string = req.params.studentId;
+        const nurseId: string = req.params.nurseId;
 
-        const Student = getModelUser();
-        let student: IUserModel;
+        const User = getModelUser();
+        let nurse: IUserModel;
 
         try {
-            student = await Student.findById(studentId, {
-                _id: 0,
-                courses: 1
-            });
+            nurse = await User.findOne(
+                { _id: nurseId, role: 'nurse' },
+                {
+                    _id: 0,
+                    associatedUsers: 1
+                });
         } catch (e) {
             return next(e);
         }
 
-        if (!student) {
+        if (!nurse) {
             res.status(404);
-            res.send(new ApiError('User not found'));
+            res.send(new ApiError('Nurse not found'));
             return;
         }
 
-        const coursesTaken: ICourseModel[] = [];
-        const Course = getModelCourse();
+        const patients: IUserModel[] = [];
 
-        for (const courseId of student.courses) {
+        for (const patientId of nurse.associatedUsers) {
             try {
-                const course = await Course.findById(courseId,
+                const patient = await User.findById(patientId,
                     {
                         __v: 0,
-                        students: 0
+                        associatedUsers: 0
                     });
 
-                coursesTaken.push(course);
+                patients.push(patient);
             } catch (e) {
                 return next(e);
             }
         }
 
-        res.json(coursesTaken.map(c => c.toDTO()));
+        res.json(patients.map(c => c.toDTO()));
     }
 
     public static async update(req: Request, res: Response, next: NextFunction) {
@@ -119,7 +124,7 @@ export class NurseController {
         let student: IUserModel;
         try {
             student = await Student.findOneAndUpdate(
-                {_id: studentId},
+                { _id: studentId },
                 updateObj,
                 {
                     fields: {

@@ -1,45 +1,44 @@
-import {Request, Response, NextFunction} from 'express';
-import {IUserModel, getModelUser} from '../models/user.model';
-import {getModelCourse, ICourseModel} from '../models/course.model';
-import {ApiError} from '../models/api-error';
+import { Request, Response, NextFunction } from 'express';
+import { IUserModel, getModelUser } from '../models/user.model';
+import { getModelCourse, ICourseModel } from '../models/course.model';
+import { ApiError } from '../models/api-error';
 
-export class CourseRegistrationController {
+export class ClinicController {
 
-    public static async takeCourse(req: Request, res: Response, next: NextFunction) {
-        const studentId: string = req.body.student;
-        const courseId: string = req.body.course;
+    public static async registerPatient(req: Request, res: Response, next: NextFunction) {
+        const patientId: string = req.body.patient;
+        const nurseId: string = req.body.nurse;
 
-        const Student = getModelUser();
-        const Course = getModelCourse();
+        const User = getModelUser();
 
-        let student: IUserModel;
-        let course: ICourseModel;
+        let patient: IUserModel;
+        let nurse: IUserModel;
 
         try {
-            student = await Student.findById(studentId);
+            patient = await User.findOne({ _id: patientId, role: 'patient' });
         } catch (e) {
             return next(e);
         }
-        if (!student) {
+        if (!patient) {
             res.status(404);
-            res.send(new ApiError('User not found'));
+            res.send(new ApiError('Patient not found'));
             return;
         }
 
         try {
-            course = await Course.findById(courseId);
+            nurse = await User.findOne({ _id: nurseId, role: 'nurse' });
         } catch (e) {
             return next(e);
         }
-        if (!course) {
+        if (!nurse) {
             res.status(404);
-            res.send(new ApiError('Course not found'));
+            res.send(new ApiError('Nurse not found'));
             return;
         }
 
         try {
-            await student.update({$addToSet: {courses: courseId}});
-            await course.update({$addToSet: {students: studentId}});
+            await patient.update({ $addToSet: { associatedUsers: nurseId } });
+            await nurse.update({ $addToSet: { associatedUsers: patientId } });
         } catch (e) {
             return next(e);
         }
@@ -48,7 +47,9 @@ export class CourseRegistrationController {
         res.send();
     }
 
-    public static async dropCourse(req: Request, res: Response, next: NextFunction) {
+    public static async unregisterPatient(req: Request, res: Response, next: NextFunction) {
+        // ToDo
+        /*
         const studentId: string = req.body.student;
         const courseId: string = req.body.course;
 
@@ -90,13 +91,14 @@ export class CourseRegistrationController {
         }
 
         try {
-            await student.update({$pull: {courses: courseId}});
-            await course.update({$pull: {students: studentId}});
+            await student.update({ $pull: { courses: courseId } });
+            await course.update({ $pull: { students: studentId } });
         } catch (e) {
             return next(e);
         }
 
         res.statusCode = 201;
         res.send();
+        */
     }
 }

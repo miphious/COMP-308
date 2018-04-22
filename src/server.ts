@@ -9,10 +9,12 @@ import * as passport from 'passport';
 import { loadAppConfigurations } from './config/app-config';
 import { configureMongoose } from './config/mongoose';
 import { configurePassport } from './config/passport';
+
 import { registerAuthRoutes } from './routes/auth.route';
 import { registerNurseRoutes } from './routes/nurse.route';
-import { registerCourseRoutes } from './routes/course.route';
-import { registerCourseRegistrationRoutes } from './routes/course-registration.route';
+import { registerPatientRoutes } from './routes/patient.route';
+import { registerClinicRoutes } from './routes/clinic.route';
+
 import { ApiError } from './models/api-error';
 
 // noinspection JSUnusedGlobalSymbols
@@ -59,7 +61,7 @@ export class Server {
         this.app.use(passport.initialize());
         this.app.use(passport.session());
 
-        this.app.use(express.static(__dirname + '/public', {dotfiles: 'ignore'}));
+        this.app.use(express.static(__dirname + '/public', { dotfiles: 'ignore' }));
     }
 
     private async registerRoutes() {
@@ -68,9 +70,9 @@ export class Server {
         });
 
         registerAuthRoutes(router);
+        registerPatientRoutes(router);
         registerNurseRoutes(router);
-        registerCourseRoutes(router);
-        registerCourseRegistrationRoutes(router);
+        registerClinicRoutes(router);
 
         {
             // respond with 404 for routes matching "/api/*"
@@ -78,7 +80,7 @@ export class Server {
 
             // redirect all 404 GET requests to Angular
             router.get('**', (req, res) => {
-                res.sendFile('public/index.html', {root: __dirname});
+                res.sendFile('public/index.html', { root: __dirname });
             });
 
             // respond all remaining requests with 404

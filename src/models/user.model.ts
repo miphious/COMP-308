@@ -1,6 +1,5 @@
 import * as mongoose from 'mongoose';
 import * as crypto from 'crypto';
-// import {CourseModelName} from './course.model'; // ToDo remove
 
 export const UserModelName = 'user';
 
@@ -12,8 +11,7 @@ export interface IUserModel extends mongoose.Document {
     role: string;
     password: string;
     salt: string;
-
-    courses: mongoose.Schema.Types.ObjectId[]; // ToDo remove
+    associatedUsers: mongoose.Schema.Types.ObjectId[];
 
     hashPassword(password: string): string;
 
@@ -54,7 +52,11 @@ export function registerModelStudent() {
                 'Password should be longer'
             ]
         },
-        salt: String
+        salt: String,
+        associatedUsers: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: UserModelName
+        }]
     });
 
     UserSchema.pre('save', function (next) {
@@ -92,6 +94,15 @@ export function registerModelStudent() {
         delete dto.password;
         delete dto.salt;
         delete dto.__v;
+
+        if (dto.associatedUsers && dto.associatedUsers.length) {
+            if (dto.role === 'nurse') {
+                dto.patients = dto.associatedUsers.map(objId => objId.toString());
+            } else if (dto.role === 'patient') {
+                dto.nurses = dto.associatedUsers.map(objId => objId.toString());
+            }
+        }
+        delete dto.associatedUsers;
 
         return dto;
     };

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { ensureAuthenticated } from '../config/passport';
-import { NurseController } from '../controllers/nurseController';
+import { NurseController } from '../controllers/nurse.controller';
 
 export function registerNurseRoutes(router: Router) {
     router

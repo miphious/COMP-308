@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import {UserModelName} from './user.model';
+import { UserModelName } from './user.model';
 
 export const CourseModelName = 'course';
 
@@ -37,16 +37,16 @@ export function registerModelCourse() {
     });
 
     CourseSchema.index({
-            code: 1,
-            section: 1
-        },
-        {unique: true}
+        code: 1,
+        section: 1
+    },
+        { unique: true }
     );
 
     CourseSchema.pre('save', function (next) {
         const course: ICourseModel = this;
         course.section = Math.trunc(+course.section)
-            .toLocaleString('en', {minimumIntegerDigits: 3});
+            .toLocaleString('en', { minimumIntegerDigits: 3 });
         next();
     });
 
