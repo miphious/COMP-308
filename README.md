@@ -1,8 +1,6 @@
-# MEAN with TypeScript
+# COMP 308 Project
 
-A template of a MEAN stack web app written in TypeScript.
-
-[Demo on Heorku](https://poulad-mean.herokuapp.com)
+[Demo on Heorku](https://comp-308.herokuapp.com)
 
 ## Getting Started
 
@@ -96,3 +94,4 @@ App is ready to be deployed on [Heroku](https://www.heroku.com). Add the followi
 
 - `NPM_CONFIG_PRODUCTION` : `false`
 - `APP_MONGO` : `mongodb://<dbuser>:<dbpassword>@abc.mlab.com:51799/foo-db`
+- `APP_SESSION_SECRET` : `secret`

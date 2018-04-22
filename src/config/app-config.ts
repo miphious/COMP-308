@@ -4,5 +4,10 @@ export interface AppConfig {
 }
 
 export function loadAppConfigurations(): AppConfig {
-    return require('./env/' + process.env.NODE_ENV + '.js');
+    const config = <AppConfig> require('./env/' + process.env.NODE_ENV + '.js');
+
+    config.db = process.env['APP_MONGO'] || config.db;
+    config.sessionSecret = process.env['APP_SESSION_SECRET'] || config.sessionSecret;
+
+    return config;
 }
