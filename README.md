@@ -6,12 +6,12 @@
 
 ### Mongo DB
 
-Run Mongo DB. Express app connects to `mean-ts-dev` database [by default](./src/config/env/development.ts).
+Run Mongo DB. Express app connects to `comp308-project` database [by default](./src/config/env/development.ts).
 
 If you use Docker, you can run the following container:
 
 ```bash
-docker run --detach --publish 27017:27017 --name mongo-ts-dev mongo
+docker run --detach --publish 27017:27017 --name mongo-comp308 mongo
 ```
 
 ### Express Web Server
