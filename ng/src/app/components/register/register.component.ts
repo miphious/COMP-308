@@ -1,17 +1,17 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../services/auth.service';
-import {Student} from '../../models/student';
-import {FormValidators} from '../../helpers/form-validators';
-import {getErrorMessage} from '../../helpers/helpers';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user';
+import { FormValidators } from '../../helpers/form-validators';
+import { getErrorMessage } from '../../helpers/helpers';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html'
 })
 export class RegisterComponent {
-    studentForm: FormGroup;
+    registrationForm: FormGroup;
 
     isSending: boolean;
 
@@ -22,7 +22,7 @@ export class RegisterComponent {
         private _router: Router,
         formBuilder: FormBuilder
     ) {
-        this.studentForm = formBuilder.group({
+        this.registrationForm = formBuilder.group({
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
@@ -30,18 +30,15 @@ export class RegisterComponent {
                 password: ['', [Validators.required, Validators.minLength(6)]],
                 passwordConfirm: ['', Validators.required]
             }, {validator: FormValidators.areEqual}),
-            studentNumber: ['', [Validators.required, Validators.minLength(6)]],
-            program: ['', [Validators.required, Validators.minLength(3)]],
-            phone: ['', [Validators.required, Validators.minLength(3)]],
+            role: ['', [Validators.required]],
             address: ['', [Validators.required, Validators.minLength(6)]],
-            city: ['', [Validators.required, Validators.minLength(2)]],
         });
     }
 
-    registerStudent() {
+    registerUser() {
         this.isSending = true;
         this._authService
-            .registerStudent(this.getStudentModel())
+            .registerUser(this.getModel())
             .subscribe(
                 () => {
                     this._router.navigate(['/login']);
@@ -53,11 +50,11 @@ export class RegisterComponent {
             );
     }
 
-    private getStudentModel(): Student {
-        const newStudent: any = Object.assign({}, this.studentForm.value);
-        newStudent.password = newStudent.passwords.password;
-        delete newStudent.passwords;
+    private getModel(): User {
+        const newModel: any = Object.assign({}, this.registrationForm.value);
+        newModel.password = newModel.passwords.password;
+        delete newModel.passwords;
 
-        return newStudent;
+        return newModel;
     }
 }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {StudentService} from '../../services/student.service';
-import {Student} from '../../models/student';
+import {User} from '../../models/user';
 import {getErrorMessage} from '../../helpers/helpers';
 
 @Component({
@@ -11,7 +11,7 @@ import {getErrorMessage} from '../../helpers/helpers';
 })
 export class ProfileComponent implements OnInit {
 
-    student: Student;
+    student: User;
 
     isSending: boolean;
 

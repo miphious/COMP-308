@@ -1,21 +1,19 @@
 import * as mongoose from 'mongoose';
 import * as crypto from 'crypto';
-import {CourseModelName} from './course.model';
+// import {CourseModelName} from './course.model';
 
-export const StudentModelName = 'student';
+export const UserModelName = 'user';
 
-export interface IStudentModel extends mongoose.Document {
+export interface IUserModel extends mongoose.Document {
     firstName: string;
     lastName: string;
     email: string;
-    studentNumber: string;
     address: string;
-    city: string;
-    phone: string;
-    program: string;
+    role: string;
     password: string;
     salt: string;
-    courses: mongoose.Schema.Types.ObjectId[];
+
+    // courses: mongoose.Schema.Types.ObjectId[];
 
     hashPassword(password: string): string;
 
@@ -25,7 +23,7 @@ export interface IStudentModel extends mongoose.Document {
 }
 
 export function registerModelStudent() {
-    const StudentSchema = new mongoose.Schema({
+    const UserSchema = new mongoose.Schema({
         firstName: {
             type: String,
             required: 'First name is required',
@@ -39,27 +37,14 @@ export function registerModelStudent() {
             match: [/.+@.+\..+/, 'Please fill a valid email address'],
             unique: true
         },
-        studentNumber: {
-            type: String,
-            unique: true,
-            required: 'Student number is required',
-            trim: true
-        },
         address: {
             type: String,
             required: 'Address is required',
         },
-        city: {
+        role: {
             type: String,
-            required: 'City is required',
-        },
-        phone: {
-            type: String,
-            required: 'Phone number is required',
-        },
-        program: {
-            type: String,
-            required: 'Program name is required',
+            required: 'Role is required',
+            enum: ['patient', 'nurse']
         },
         password: {
             type: String,
@@ -69,15 +54,11 @@ export function registerModelStudent() {
                 'Password should be longer'
             ]
         },
-        salt: String,
-        courses: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: CourseModelName
-        }]
+        salt: String
     });
 
-    StudentSchema.pre('save', function (next) {
-        const user: IStudentModel = this;
+    UserSchema.pre('save', function (next) {
+        const user: IUserModel = this;
 
         if (!user.isModified('password')) {
             return next();
@@ -89,22 +70,22 @@ export function registerModelStudent() {
         next();
     });
 
-    StudentSchema.methods.hashPassword = function (password: string): string {
-        const user: IStudentModel = this;
+    UserSchema.methods.hashPassword = function (password: string): string {
+        const user: IUserModel = this;
         return crypto
             .pbkdf2Sync(password, user.salt, 1000, 64, 'sha1')
             .toString('base64');
     };
 
-    StudentSchema.methods.verifyPassword = function (password: string) {
-        const user: IStudentModel = this;
+    UserSchema.methods.verifyPassword = function (password: string) {
+        const user: IUserModel = this;
         return user.password === user.hashPassword(password);
     };
 
-    StudentSchema.methods.toDTO = function () {
-        const student: IStudentModel = this;
+    UserSchema.methods.toDTO = function () {
+        const user: IUserModel = this;
 
-        const dto = student.toObject();
+        const dto = user.toObject();
 
         dto.id = dto._id;
         delete dto._id;
@@ -115,9 +96,9 @@ export function registerModelStudent() {
         return dto;
     };
 
-    mongoose.model(StudentModelName, StudentSchema);
+    mongoose.model(UserModelName, UserSchema);
 }
 
-export function getModelStudent() {
-    return mongoose.model<IStudentModel>(StudentModelName);
+export function getModelUser() {
+    return mongoose.model<IUserModel>(UserModelName);
 }

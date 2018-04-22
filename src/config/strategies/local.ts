@@ -1,10 +1,10 @@
 import * as passport from 'passport';
 import {Strategy, IVerifyOptions} from 'passport-local';
-import {getModelStudent} from '../../models/student.model';
+import {getModelUser} from '../../models/user.model';
 
 async function verifyUser(username: string, password: string,
                           done: (error: any, user?: any, options?: IVerifyOptions) => void) {
-    const Student = getModelStudent();
+    const Student = getModelUser();
     let user;
     try {
         user = await Student.findOne({

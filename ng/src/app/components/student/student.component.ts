@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {StudentService} from '../../services/student.service';
-import {Student} from '../../models/student';
+import {User} from '../../models/user';
 import {Course} from '../../models/course';
 import {getErrorMessage} from '../../helpers/helpers';
 
@@ -11,7 +11,7 @@ import {getErrorMessage} from '../../helpers/helpers';
 })
 export class StudentComponent implements OnInit {
 
-    student: Student;
+    student: User;
 
     takenCourses: Course[];
 

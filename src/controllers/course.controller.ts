@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {getModelCourse, ICourseModel} from '../models/course.model';
-import {IStudentModel, getModelStudent} from '../models/student.model';
+import {IUserModel, getModelUser} from '../models/user.model';
 import {ApiError} from '../models/api-error';
 
 export class CourseController {
@@ -116,7 +116,7 @@ export class CourseController {
             return;
         }
 
-        const Student = getModelStudent();
+        const Student = getModelUser();
         for (const studentId of course.students) {
             try {
                 await Student.findOneAndUpdate(
@@ -153,8 +153,8 @@ export class CourseController {
             return;
         }
 
-        const studentsInCourse: IStudentModel[] = [];
-        const Student = getModelStudent();
+        const studentsInCourse: IUserModel[] = [];
+        const Student = getModelUser();
 
         for (const studentId of course.students) {
             try {

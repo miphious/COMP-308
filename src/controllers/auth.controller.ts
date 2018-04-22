@@ -1,10 +1,10 @@
 import {Request, Response, NextFunction} from 'express';
-import {getModelStudent, IStudentModel} from '../models/student.model';
+import {getModelUser, IUserModel} from '../models/user.model';
 
 export class AuthController {
     public static async register(req: Request, res: Response, next: NextFunction) {
-        const Student = getModelStudent();
-        const student = new Student(req.body);
+        const User = getModelUser();
+        const student = new User(req.body);
 
         try {
             await student.save();
@@ -20,7 +20,7 @@ export class AuthController {
             if (err) {
                 return next(err);
             } else {
-                const userDto = (req.user as IStudentModel).toDTO();
+                const userDto = (req.user as IUserModel).toDTO();
 
                 return res.json(userDto);
             }

@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import {StudentModelName} from './student.model';
+import {UserModelName} from './user.model';
 
 export const CourseModelName = 'course';
 
@@ -32,7 +32,7 @@ export function registerModelCourse() {
         },
         students: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: StudentModelName
+            ref: UserModelName
         }]
     });
 

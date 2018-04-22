@@ -1,4 +1,4 @@
-<form [formGroup]="studentForm" (ngSubmit)="registerStudent()">
+<form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="firstName">First Name</label>
@@ -28,36 +28,25 @@
 
     <div class="form-row">
         <div class="form-group col-md-4">
-            <label for="studentId">Student ID</label>
-            <input type="text" class="form-control" id="studentId" placeholder="e.g. 300 123 456"
-                   formControlName="studentNumber">
+            <label for="role">Role</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="role_patient" value="patient" formControlName="role">
+                <label class="form-check-label" for="role_patient">Patient</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="role_nurse" value="nurse" formControlName="role">
+                <label class="form-check-label" for="role_nurse">Nurse</label>
+            </div>
         </div>
-        <div class="form-group col-md-4">
-            <label for="program">Program</label>
-            <input type="text" class="form-control" id="program" placeholder="e.g. Software Engineering"
-                   formControlName="program">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="phone">Phone Number</label>
-            <input type="text" class="form-control" id="phone" placeholder="e.g. 647 123 456" formControlName="phone">
-        </div>
-    </div>
-
-    <div class="form-row">
         <div class="form-group col-md-8">
             <label for="address">Address</label>
             <input type="text" class="form-control" id="address" placeholder="e.g. 123 Main St."
                    formControlName="address">
         </div>
-
-        <div class="form-group col-md-4">
-            <label for="city">City</label>
-            <input type="text" class="form-control" id="city" placeholder="e.g. Toronto" formControlName="city">
-        </div>
     </div>
 
     <button type="submit" class="btn btn-outline-success pull-right"
-            [disabled]="isSending || studentForm.pristine || studentForm.invalid">
+            [disabled]="isSending || registrationForm.pristine || registrationForm.invalid">
         <i class="fa fa-user-plus"></i>
         Register
     </button>

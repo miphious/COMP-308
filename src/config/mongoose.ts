@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 import {loadAppConfigurations} from './app-config';
-import {registerModelStudent} from '../models/student.model';
+import {registerModelStudent} from '../models/user.model';
 import {registerModelCourse} from '../models/course.model';
 
 export async function configureMongoose() {

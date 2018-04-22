@@ -1,15 +1,15 @@
 import * as passport from 'passport';
 import {NextFunction, Request, Response} from 'express';
 import {configureLocalStrategy} from './strategies/local';
-import {getModelStudent, IStudentModel} from '../models/student.model';
+import {getModelUser, IUserModel} from '../models/user.model';
 
 export function configurePassport() {
-    passport.serializeUser<IStudentModel, string>(function (user, done) {
+    passport.serializeUser<IUserModel, string>(function (user, done) {
         done(null, user.id);
     });
 
-    passport.deserializeUser<IStudentModel, string>(function (id, done) {
-        const Student = getModelStudent();
+    passport.deserializeUser<IUserModel, string>(function (id, done) {
+        const Student = getModelUser();
         Student.findById(id,
             {
                 password: 0,

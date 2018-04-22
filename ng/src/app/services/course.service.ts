@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Student} from '../models/student';
+import {User} from '../models/user';
 import {Course} from '../models/course';
 
 @Injectable()
@@ -25,7 +25,7 @@ export class CourseService {
 
     getAllEnrolledStudents(courseId: string) {
         return this._http
-            .get<Student[]>(`/api/courses/${courseId}/students`);
+            .get<User[]>(`/api/courses/${courseId}/students`);
     }
 
     updateCourse(course: Course) {

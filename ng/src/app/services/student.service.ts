@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Student} from '../models/student';
+import {User} from '../models/user';
 import {Course} from '../models/course';
 import {RequestOptions} from '@angular/http';
 
@@ -12,12 +12,12 @@ export class StudentService {
 
     getStudentById(id: string) {
         return this._http
-            .get<Student>(`/api/students/${id}`);
+            .get<User>(`/api/students/${id}`);
     }
 
     getAllStudents() {
         return this._http
-            .get<Student[]>(`/api/students`);
+            .get<User[]>(`/api/students`);
     }
 
     getAllTakenCourses(studentId: string) {
@@ -25,9 +25,9 @@ export class StudentService {
             .get<Course[]>(`/api/students/${studentId}/courses`);
     }
 
-    updateStudent(student: Student) {
+    updateStudent(student: User) {
         return this._http
-            .patch<Student>(`/api/students/${student.id}`, student);
+            .patch<User>(`/api/students/${student.id}`, student);
     }
 
     takeCourse(studentId: string, courseId: string) {

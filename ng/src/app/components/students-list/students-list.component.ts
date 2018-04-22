@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Student} from '../../models/student';
+import {User} from '../../models/user';
 import {StudentService} from '../../services/student.service';
 import {getErrorMessage} from '../../helpers/helpers';
 
@@ -8,7 +8,7 @@ import {getErrorMessage} from '../../helpers/helpers';
     templateUrl: './students-list.component.html'
 })
 export class StudentsListComponent implements OnInit {
-    @Input() students: Student[];
+    @Input() students: User[];
 
     error?: string;
 

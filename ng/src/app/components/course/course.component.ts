@@ -4,7 +4,7 @@ import {NgForm} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {CourseService} from '../../services/course.service';
 import {StudentService} from '../../services/student.service';
-import {Student} from '../../models/student';
+import {User} from '../../models/user';
 import {Course} from '../../models/course';
 import {getErrorMessage} from '../../helpers/helpers';
 
@@ -16,7 +16,7 @@ export class CourseComponent implements OnInit {
 
     course: Course;
 
-    enrolledStudents: Student[];
+    enrolledStudents: User[];
 
     addDropData: {
         title: string,

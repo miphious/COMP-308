@@ -1,5 +1,5 @@
 import {Request, Response, NextFunction} from 'express';
-import {IStudentModel, getModelStudent} from '../models/student.model';
+import {IUserModel, getModelUser} from '../models/user.model';
 import {getModelCourse, ICourseModel} from '../models/course.model';
 import {ApiError} from '../models/api-error';
 
@@ -9,10 +9,10 @@ export class CourseRegistrationController {
         const studentId: string = req.body.student;
         const courseId: string = req.body.course;
 
-        const Student = getModelStudent();
+        const Student = getModelUser();
         const Course = getModelCourse();
 
-        let student: IStudentModel;
+        let student: IUserModel;
         let course: ICourseModel;
 
         try {
@@ -22,7 +22,7 @@ export class CourseRegistrationController {
         }
         if (!student) {
             res.status(404);
-            res.send(new ApiError('Student not found'));
+            res.send(new ApiError('User not found'));
             return;
         }
 
@@ -52,10 +52,10 @@ export class CourseRegistrationController {
         const studentId: string = req.body.student;
         const courseId: string = req.body.course;
 
-        const Student = getModelStudent();
+        const Student = getModelUser();
         const Course = getModelCourse();
 
-        let student: IStudentModel;
+        let student: IUserModel;
         let course: ICourseModel;
 
         try {
@@ -65,7 +65,7 @@ export class CourseRegistrationController {
         }
         if (!student) {
             res.status(404);
-            res.send(new ApiError('Student not found'));
+            res.send(new ApiError('User not found'));
             return;
         }
 

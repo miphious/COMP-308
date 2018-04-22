@@ -2,17 +2,17 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {fromEvent} from 'rxjs/observable/fromEvent';
 import 'rxjs/add/operator/do';
-import {Student} from '../models/student';
+import {User} from '../models/user';
 import {EventEmitter} from 'events';
 
 @Injectable()
 export class AuthService {
 
-    get user(): Student {
+    get user(): User {
         return this._currentUser;
     }
 
-    private _currentUser: Student;
+    private _currentUser: User;
 
     private _authEventEmitter = new EventEmitter();
 
@@ -20,21 +20,21 @@ export class AuthService {
     }
 
     observeUserLogin() {
-        return fromEvent<Student>(this._authEventEmitter, 'login');
+        return fromEvent<User>(this._authEventEmitter, 'login');
     }
 
     observeUserLogout() {
         return fromEvent(this._authEventEmitter, 'logout');
     }
 
-    registerStudent(student: Student) {
+    registerUser(user: User) {
         return this._http
-            .post<Student>('/api/register', student);
+            .post<User>('/api/register', user);
     }
 
     login(login: { username: string, password: string }) {
         return this._http
-            .post<Student>('/api/login', login)
+            .post<User>('/api/login', login)
             .do(student => {
                 this._currentUser = student;
                 this._authEventEmitter.emit('login', student);

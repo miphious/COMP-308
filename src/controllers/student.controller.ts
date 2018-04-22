@@ -1,13 +1,13 @@
 import {Request, Response, NextFunction} from 'express';
-import {IStudentModel, getModelStudent} from '../models/student.model';
+import {IUserModel, getModelUser} from '../models/user.model';
 import {ICourseModel, getModelCourse} from '../models/course.model';
 import {ApiError} from '../models/api-error';
 
 export class StudentController {
 
     public static async getAll(req: Request, res: Response, next: NextFunction) {
-        const Student = getModelStudent();
-        let students: IStudentModel[];
+        const Student = getModelUser();
+        let students: IUserModel[];
 
         try {
             students = await Student.find({}, {
@@ -24,7 +24,7 @@ export class StudentController {
 
     public static async getById(req: Request, res: Response, next: NextFunction) {
         const studentId: string = req.params.studentId;
-        const Student = getModelStudent();
+        const Student = getModelUser();
         let student;
 
         try {
@@ -39,7 +39,7 @@ export class StudentController {
 
         if (!student) {
             res.status(404);
-            res.send(new ApiError('Student not found'));
+            res.send(new ApiError('User not found'));
             return;
         }
 
@@ -49,8 +49,8 @@ export class StudentController {
     public static async getRegisteredCourses(req: Request, res: Response, next: NextFunction) {
         const studentId: string = req.params.studentId;
 
-        const Student = getModelStudent();
-        let student: IStudentModel;
+        const Student = getModelUser();
+        let student: IUserModel;
 
         try {
             student = await Student.findById(studentId, {
@@ -63,7 +63,7 @@ export class StudentController {
 
         if (!student) {
             res.status(404);
-            res.send(new ApiError('Student not found'));
+            res.send(new ApiError('User not found'));
             return;
         }
 
@@ -89,7 +89,7 @@ export class StudentController {
 
     public static async update(req: Request, res: Response, next: NextFunction) {
         const studentId: string = req.params.studentId;
-        const Student = getModelStudent();
+        const Student = getModelUser();
 
         const allowedFieldsForUpdate = [
             'firstName', 'lastName', 'email', 'studentNumber', 'address', 'city', 'phone', 'program'
@@ -116,7 +116,7 @@ export class StudentController {
             return;
         }
 
-        let student: IStudentModel;
+        let student: IUserModel;
         try {
             student = await Student.findOneAndUpdate(
                 {_id: studentId},
