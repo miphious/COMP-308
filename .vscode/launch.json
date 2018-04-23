@@ -4,7 +4,17 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "nodemon",
+            "name": "nodemon - global",
+            "runtimeExecutable": "nodemon",
+            "program": "${workspaceFolder}/bin/www.js",
+            "restart": true,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "nodemon - local npm",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run",

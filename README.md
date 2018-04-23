@@ -53,6 +53,7 @@ npm run nodemon
 
 If you use Visual Studio Code, there are [configurations](./.vscode/) to help you with debugging the app.
 
+1. Make sure nodemon is installed globally: `npm install --global nodemon`
 1. Open app in VS Code
 1. Press `Ctrl + Shift + B` (Run Default Build Task) to watch TS files in "src/" and transpile them in background
 1. Press F5 to debug TS files
