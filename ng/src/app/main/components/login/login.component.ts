@@ -12,11 +12,8 @@ export class LoginComponent implements OnInit {
         username: '',
         password: ''
     };
-
     isSending: boolean;
-
-    error?: string;
-
+    error: string;
     private _returnUrl?: string;
 
     constructor(
@@ -31,6 +28,9 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 p => {
                     this._returnUrl = p.get('returnUrl');
+                    if (p.get('error')) {
+                        this.error = 'Not Authorized!';
+                    }
                 }
             );
     }
@@ -42,12 +42,25 @@ export class LoginComponent implements OnInit {
             .login(this.loginModel)
             .subscribe(
                 () => {
-                    this._router.navigate([this._returnUrl || '/home']);
+                    this.navigateToDashboard();
                 },
                 e => {
                     this.error = getErrorMessage(e);
                     this.isSending = false;
                 }
             );
+    }
+
+    private async navigateToDashboard() {
+        this.isSending = true;
+        this.error = null;
+
+        let b: boolean;
+        try {
+            b = await this._router.navigate([this._returnUrl || '/home']);
+        } catch (e) {
+            this.error = getErrorMessage(e);
+            this.isSending = false;
+        }
     }
 }

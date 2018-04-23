@@ -1,0 +1,7 @@
+<ng-container *ngIf="errors?.length; else notFound">
+    <h4 *ngFor="let error of errors">{{ error }}</h4>
+</ng-container>
+
+<ng-template #notFound>
+    <h4>Not Found</h4>
+</ng-template>

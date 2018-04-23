@@ -8,7 +8,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ErrorComponent } from './components/error/error.component';
+import { NotAuthorizedComponent } from './components/not-authorized/not-authorized.component';
 
 @NgModule({
     imports: [
@@ -24,7 +25,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
         LoginComponent,
         RegisterComponent,
         ProfileComponent,
-        NotFoundComponent,
+        ErrorComponent,
     ],
     exports: [
         NavbarComponent,
@@ -32,7 +33,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
         LoginComponent,
         RegisterComponent,
         ProfileComponent,
-        NotFoundComponent,
+        ErrorComponent,
     ]
 })
 export class MainModule {
