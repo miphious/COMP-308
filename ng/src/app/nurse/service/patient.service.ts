@@ -13,4 +13,17 @@ export class PatientService {
         return this._http
             .get<Patient[]>('/api/patients');
     }
+
+    registerWithPatient(nurseId: string, patientId: string) {
+        return this._http
+            .post<void>('/api/clinic/register', {
+                nurse: nurseId, patient: patientId
+            });
+    }
+
+    unregisterWithPatient(nurseId: string, patientId: string) {
+        // ToDo
+        return this._http
+            .delete<void>(`/api/clinic/register?nurse=${nurseId}&patient=${patientId}`);
+    }
 }

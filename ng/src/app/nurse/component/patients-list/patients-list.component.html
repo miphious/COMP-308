@@ -24,11 +24,14 @@
             <th scope="row"><span>{{ p.firstName }} {{ p.lastName }}</span></th>
             <td><span>{{ p.email }}</span></td>
             <td><span>{{ p.address}}</span></td>
-            <td class="text-center"><span>{{ getNursesValue(p.nurses) }}</span></td>
+            <td class="text-center"><span>{{ p.nurses?.length || '-' }}</span></td>
             <td class="text-center">
-                <a role="button" class="btn btn-success" [routerLink]="'/courses/view/' + p.id">
-                    Details
-                </a>
+                <button *ngIf="!isPatientTaken(p)" class="btn btn-success" (click)="registerPatient(p.id)">
+                    Register
+                </button>
+                <button *ngIf="isPatientTaken(p)" class="btn btn-danger" (click)="unregisterPatient(p.id)">
+                    Unregister
+                </button>
             </td>
         </tr>
         </tbody>

@@ -3,7 +3,6 @@ import { PatientService } from '../../service/patient.service';
 import { Patient } from '../../../shared/models/patient';
 import { getErrorMessage } from '../../../shared/helpers/helpers';
 import { AuthService } from '../../../shared/services/auth.service';
-import { User } from '../../../shared/models/user';
 
 @Component({
     selector: 'app-patients-list',
@@ -23,15 +22,52 @@ export class PatientsListComponent implements OnInit {
         this.loadAllPatients();
     }
 
-    getNursesValue(nurseIds: string[]): string {
-        if (nurseIds && nurseIds.length) {
-            let text = nurseIds.length + '';
-            if (nurseIds.some(id => id === this._authService.user.id)) {
-                text += ' (including you)';
-            }
-            return text;
+    registerPatient(patientId: string) {
+        this.error = null;
+        const nurseId = this._authService.user.id;
+        this._patientService
+            .registerWithPatient(nurseId, patientId)
+            .subscribe(
+                () => {
+                    const patient = this.patients
+                        .filter(p => p.id === patientId)
+                        [0];
+                    if (!patient.nurses) {
+                        patient.nurses = [];
+                    }
+                    patient.nurses.push(nurseId);
+                },
+                e => {
+                    this.error = getErrorMessage(e);
+                }
+            );
+    }
+
+    unregisterPatient(patientId: string) {
+        this.error = null;
+        const nurseId = this._authService.user.id;
+        this._patientService
+            .unregisterWithPatient(nurseId, patientId)
+            .subscribe(
+                () => {
+                    const patient = this.patients
+                        .filter(p => p.id === patientId)
+                        [0];
+
+                    patient.nurses = patient.nurses
+                        .filter(id => id !== nurseId);
+                },
+                e => {
+                    this.error = getErrorMessage(e);
+                }
+            );
+    }
+
+    isPatientTaken(patient: Patient): boolean {
+        if (!patient.nurses) {
+            return false;
         } else {
-            return '-';
+            return patient.nurses.some(id => id === this._authService.user.id);
         }
     }
 

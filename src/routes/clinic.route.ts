@@ -16,5 +16,5 @@ export function registerClinicRoutes(router: Router) {
             ensureAuthenticated,
             ClinicController.addExamination
         )
-    ;
+        ;
 }
