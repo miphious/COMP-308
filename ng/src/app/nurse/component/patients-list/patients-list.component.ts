@@ -23,10 +23,10 @@ export class PatientsListComponent implements OnInit {
         this.loadAllPatients();
     }
 
-    getNursesValue(nurses: User[]): string {
-        if (nurses && nurses.length) {
-            let text = nurses.length as string;
-            if (nurses.some(id => id === this._authService.user.id)) {
+    getNursesValue(nurseIds: string[]): string {
+        if (nurseIds && nurseIds.length) {
+            let text = nurseIds.length + '';
+            if (nurseIds.some(id => id === this._authService.user.id)) {
                 text += ' (including you)';
             }
             return text;
