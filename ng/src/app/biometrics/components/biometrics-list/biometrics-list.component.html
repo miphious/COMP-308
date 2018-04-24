@@ -1,0 +1,22 @@
+<table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">Body Temperature</th>
+        <th scope="col">Heart Rate</th>
+        <th scope="col">Blood Pressure</th>
+        <th scope="col">Respiratory Rate</th>
+        <th scope="col" class="text-center">By</th>
+        <th scope="col" class="text-center">Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let bm of biometricsList">
+        <td><span>{{ bm.bodyTemperature }}</span></td>
+        <td><span>{{ bm.heartRate }}</span></td>
+        <td><span>{{ bm.bloodPressure }}</span></td>
+        <td><span>{{ bm.respiratoryRate }}</span></td>
+        <td class="text-center"><span>{{ bm.patient === bm.postedBy ? 'Patient' : 'Nurse' }}</span></td>
+        <td class="text-center"><span>{{ bm.postedAt | date:'EEEE, MMM d, y, h:mm a' }}</span></td>
+    </tr>
+    </tbody>
+</table>

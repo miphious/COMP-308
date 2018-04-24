@@ -12,13 +12,13 @@ export function registerClinicRoutes(router: Router) {
             ensureAuthenticated,
             ClinicController.unregisterPatient
         )
-        .get('/api/clinic/examinations/:patientId',
+        .get('/api/clinic/biometrics/:patientId',
             ensureAuthenticated,
-            ClinicController.getAllExaminations
+            ClinicController.getAllBiometrics
         )
-        .post('/api/clinic/examinations',
+        .post('/api/clinic/biometrics',
             ensureAuthenticated,
-            ClinicController.addExamination
+            ClinicController.addBiometrics
         )
         ;
 }

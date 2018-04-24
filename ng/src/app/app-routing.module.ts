@@ -30,8 +30,8 @@ const routes: Routes = [
         canLoad: [PatientGuard]
     },
     {
-        path: 'examinations',
-        loadChildren: 'app/examination/examination.module#ExaminationModule',
+        path: 'biometrics',
+        loadChildren: 'app/biometrics/biometrics.module#BiometricsModule',
         data: {preload: true},
         canActivate: [AuthGuard]
     },

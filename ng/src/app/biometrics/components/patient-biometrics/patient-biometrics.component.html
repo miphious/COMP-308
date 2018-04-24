@@ -17,15 +17,15 @@
     <br>
     <div class="row" *ngIf="patient">
         <div class="col-md-12">
-            <h4>Post a new examination:</h4>
-            <app-add-examination (examinationPosted)="addNewExamination($event)"></app-add-examination>
+            <h4>Post Biometrics:</h4>
+            <app-add-biometrics (biometricsPosted)="addNewBiometrics($event)"></app-add-biometrics>
         </div>
     </div>
     <br>
-    <div class="row" *ngIf="examinations?.length">
+    <div class="row" *ngIf="biometricsList?.length">
         <div class="col-md-12">
-            <h4>Previous Examinations:</h4>
-            <app-examinations-list [examinations]="examinations"></app-examinations-list>
+            <h4>Previous Biometrics:</h4>
+            <app-biometrics-list [biometricsList]="biometricsList"></app-biometrics-list>
         </div>
     </div>
 </div>

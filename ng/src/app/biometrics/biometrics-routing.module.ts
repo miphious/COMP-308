@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PatientExaminationComponent } from './components/patient-examination/patient-examination.component';
+import { PatientBiometricsComponent } from './components/patient-biometrics/patient-biometrics.component';
 import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
-    {path: ':patientId', component: PatientExaminationComponent},
+    {path: ':patientId', component: PatientBiometricsComponent},
 ];
 
 @NgModule({
@@ -14,5 +14,5 @@ const routes: Routes = [
     ],
     exports: [RouterModule]
 })
-export class ExaminationRoutingModule {
+export class BiometricsRoutingModule {
 }

@@ -3,21 +3,21 @@ import { ActivatedRoute } from '@angular/router';
 import { PatientService } from '../../../shared/services/patient.service';
 import { getErrorMessage } from '../../../shared/helpers/helpers';
 import { Patient } from '../../../shared/models/patient';
-import { ExaminationService } from '../../services/examination.service';
-import { Examination } from '../../models/examination';
+import { BiometricsService } from '../../services/biometrics.service';
+import { Biometrics } from '../../models/biometrics';
 
 @Component({
-    selector: 'app-patient-examination',
-    templateUrl: './patient-examination.component.html'
+    selector: 'app-patient-biometrics',
+    templateUrl: './patient-biometrics.component.html'
 })
-export class PatientExaminationComponent implements OnInit {
+export class PatientBiometricsComponent implements OnInit {
     patient: Patient;
-    examinations: Examination[];
+    biometricsList: Biometrics[];
     error: string;
 
     constructor(
         private _patientService: PatientService,
-        private _examinationService: ExaminationService,
+        private _biometricsService: BiometricsService,
         private _route: ActivatedRoute
     ) {
     }
@@ -27,7 +27,7 @@ export class PatientExaminationComponent implements OnInit {
             .subscribe(p => {
                 const patientId = p.get('patientId');
                 this.loadPatient(patientId);
-                this.loadExaminations(patientId);
+                this.loadBiometrics(patientId);
             });
     }
 
@@ -44,12 +44,12 @@ export class PatientExaminationComponent implements OnInit {
             );
     }
 
-    loadExaminations(patientId: string) {
-        this._examinationService
+    loadBiometrics(patientId: string) {
+        this._biometricsService
             .getAllForPatient(patientId)
             .subscribe(
-                examinations => {
-                    this.examinations = examinations;
+                bmList => {
+                    this.biometricsList = bmList;
                 },
                 e => {
                     this.error = getErrorMessage(e);
@@ -57,7 +57,7 @@ export class PatientExaminationComponent implements OnInit {
             );
     }
 
-    addNewExamination(examination: Examination) {
-        this.examinations.push(examination);
+    addNewBiometrics(biometrics: Biometrics) {
+        this.biometricsList.push(biometrics);
     }
 }

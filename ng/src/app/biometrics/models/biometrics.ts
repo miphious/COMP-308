@@ -1,4 +1,4 @@
-export class Examination {
+export class Biometrics {
     id: string;
     bodyTemperature?: string;
     heartRate?: string;

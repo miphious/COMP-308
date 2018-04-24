@@ -7,7 +7,7 @@ import { PatientsListComponent } from './component/patients-list/patients-list.c
 import { HttpClientModule } from '@angular/common/http';
 import { PatientService } from '../shared/services/patient.service';
 import { PatientComponent } from './component/patient/patient.component';
-import { ExaminationsListComponent } from '../examination/components/examinations-list/examinations-list.component';
+import { BiometricsListComponent } from '../biometrics/components/biometrics-list/biometrics-list.component';
 
 @NgModule({
     imports: [

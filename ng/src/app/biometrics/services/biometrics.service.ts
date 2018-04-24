@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Examination } from '../models/examination';
+import { Biometrics } from '../models/biometrics';
 
 @Injectable()
-export class ExaminationService {
+export class BiometricsService {
     constructor(
         private _http: HttpClient
     ) {
@@ -11,6 +11,6 @@ export class ExaminationService {
 
     getAllForPatient(patientId: string) {
         return this._http
-            .get<Examination[]>(`/api/clinic/examinations/${patientId}`);
+            .get<Biometrics[]>(`/api/clinic/biometrics/${patientId}`);
     }
 }

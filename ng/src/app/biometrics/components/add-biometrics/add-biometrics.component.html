@@ -3,22 +3,22 @@
         <div class="form-group col-md-2">
             <label for="bodyTemperature" class="sr-only">Body Temperature</label>
             <input type="text" class="form-control" id="bodyTemperature" name="bodyTemperature"
-                   placeholder="Body Temperature" required [(ngModel)]="examination.bodyTemperature">
+                   placeholder="Body Temperature" required [(ngModel)]="biometrics.bodyTemperature">
         </div>
         <div class="form-group col-md-2">
             <label for="heartRate" class="sr-only">Heart Rate</label>
             <input type="text" class="form-control" id="heartRate" name="heartRate" placeholder="Heart Rate"
-                   required [(ngModel)]="examination.heartRate">
+                   required [(ngModel)]="biometrics.heartRate">
         </div>
         <div class="form-group col-md-2">
             <label for="bloodPressure" class="sr-only">Blood Pressure</label>
             <input type="text" class="form-control" id="bloodPressure" name="bloodPressure" placeholder="Blood Pressure"
-                   required [(ngModel)]="examination.bloodPressure">
+                   required [(ngModel)]="biometrics.bloodPressure">
         </div>
         <div class="form-group col-md-2">
             <label for="respiratoryRate" class="sr-only">Respiratory Rate</label>
             <input type="text" class="form-control" id="respiratoryRate" name="respiratoryRate"
-                   placeholder="Respiratory Rate" required [(ngModel)]="examination.respiratoryRate">
+                   placeholder="Respiratory Rate" required [(ngModel)]="biometrics.respiratoryRate">
         </div>
         <div class="form-group col-md-1">
             <button type="submit" class="btn btn-secondary" [disabled]="isSending || addExamForm.form.invalid">

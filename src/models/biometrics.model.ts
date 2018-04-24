@@ -1,9 +1,9 @@
 import * as mongoose from 'mongoose';
 import { UserModelName } from './user.model';
 
-export const ExaminationModelName = 'examination';
+export const BiometricsModelName = 'biometrics';
 
-export interface IExaminationModel extends mongoose.Document {
+export interface IBiometricsModel extends mongoose.Document {
     bodyTemperature: string;
     heartRate: string;
     bloodPressure: string;
@@ -15,8 +15,8 @@ export interface IExaminationModel extends mongoose.Document {
     toDTO(): any;
 }
 
-export function registerModelExamination() {
-    const ExaminationSchema = new mongoose.Schema({
+export function registerModelBiometrics() {
+    const BiometricsSchema = new mongoose.Schema({
         bodyTemperature: {
             type: String,
             required: 'Body temperature is required',
@@ -45,10 +45,10 @@ export function registerModelExamination() {
         }
     });
 
-    ExaminationSchema.methods.toDTO = function () {
-        const exam: IExaminationModel = this;
+    BiometricsSchema.methods.toDTO = function () {
+        const biometrics: IBiometricsModel = this;
 
-        const dto = exam.toObject();
+        const dto = biometrics.toObject();
 
         dto.id = dto._id;
         delete dto._id;
@@ -57,9 +57,9 @@ export function registerModelExamination() {
         return dto;
     };
 
-    mongoose.model(ExaminationModelName, ExaminationSchema);
+    mongoose.model(BiometricsModelName, BiometricsSchema);
 }
 
-export function getModelExamination() {
-    return mongoose.model<IExaminationModel>(ExaminationModelName);
+export function getModelBiometrics() {
+    return mongoose.model<IBiometricsModel>(BiometricsModelName);
 }

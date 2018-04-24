@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { IUserModel, getModelUser } from '../models/user.model';
-import { getModelExamination, IExaminationModel } from '../models/examination.model';
+import { getModelBiometrics, IBiometricsModel } from '../models/biometrics.model';
 import { ApiError } from '../models/api-error';
 
 export class ClinicController {
@@ -98,22 +98,22 @@ export class ClinicController {
         res.send();
     }
 
-    public static async getAllExaminations(req: Request, res: Response, next: NextFunction) {
+    public static async getAllBiometrics(req: Request, res: Response, next: NextFunction) {
         const patientId: string = req.params.patientId;
 
-        const Examination = getModelExamination();
-        let exams: IExaminationModel[];
+        const Biometrics = getModelBiometrics();
+        let biometrics: IBiometricsModel[];
 
         try {
-            exams = await Examination.find({ patient: patientId }, { __v: 0 });
+            biometrics = await Biometrics.find({ patient: patientId }, { __v: 0 });
         } catch (e) {
             return next(e);
         }
 
-        res.json(exams.map(s => s.toDTO()));
+        res.json(biometrics.map(s => s.toDTO()));
     }
 
-    public static async addExamination(req: Request, res: Response, next: NextFunction) {
+    public static async addBiometrics(req: Request, res: Response, next: NextFunction) {
         const User = getModelUser();
 
         let patient: IUserModel;
@@ -128,21 +128,21 @@ export class ClinicController {
             return;
         }
 
-        const Examination = getModelExamination();
+        const biometrics = getModelBiometrics();
 
         const reqBody = Object.assign({}, req.body);
         reqBody.postedAt = new Date();
         reqBody.postedBy = req.user.id;
 
-        const examination = new Examination(reqBody);
+        const newBiometrics = new biometrics(reqBody);
 
         try {
-            await examination.save();
+            await newBiometrics.save();
         } catch (e) {
             return next(e);
         }
 
         res.statusCode = 201;
-        return res.json(examination.toDTO());
+        return res.json(newBiometrics.toDTO());
     }
 }
