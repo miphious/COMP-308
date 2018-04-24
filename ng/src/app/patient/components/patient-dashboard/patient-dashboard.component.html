@@ -1,22 +1,24 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h4>Hi {{ patient.firstName }}</h4>
+            <h4>Hi {{ patient?.firstName }}</h4>
         </div>
     </div>
     <br>
-    <!--<div class="row" *ngIf="patient">-->
-        <!--<div class="col-md-12">-->
-            <!--<h4>Post Biometrics:</h4>-->
-            <!--<app-add-biometrics [patientId]="patient.id"-->
-                                <!--(biometricsPosted)="addNewBiometrics($event)"></app-add-biometrics>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<br>-->
-    <!--<div class="row" *ngIf="biometricsList?.length">-->
-        <!--<div class="col-md-12">-->
-            <!--<h4>Previous Biometrics:</h4>-->
-            <!--<app-biometrics-list [biometricsList]="biometricsList"></app-biometrics-list>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="row" *ngIf="dailyTips?.length">
+        <div class="col-md-12">
+            <h4>Daily Tips:</h4>
+            <div class="card" *ngFor="let tip of dailyTips" style="margin: .3em auto;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ tip.text }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        posted at {{ tip.postedAt | date:'EEEE, MMM d, y, h:mm a'}}
+                    </h6>
+                    <p class="card-text"></p>
+                    <a *ngIf="tip.link?.length" [href]="tip.link" class="card-link">Link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
 </div>
