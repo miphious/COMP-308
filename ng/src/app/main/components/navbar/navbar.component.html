@@ -10,18 +10,26 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <!--<li class="nav-item">-->
-                <!--<a class="nav-link" routerLink="/students/all" routerLinkActive="active">-->
-                    <!--<i class="fa fa-graduation-cap"></i>-->
-                    <!--Students-->
-                <!--</a>-->
-            <!--</li>-->
-            <!--<li class="nav-item">-->
-                <!--<a class="nav-link" routerLink="/courses/all" routerLinkActive="active">-->
-                    <!--<i class="fa fa-book"></i>-->
-                    <!--Courses-->
-                <!--</a>-->
-            <!--</li>-->
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/home" routerLinkActive="active">
+                    <i class="fa fa-home"></i> Home
+                </a>
+            </li>
+            <li *ngIf="user?.role === 'nurse'" class="nav-item">
+                <a class="nav-link" routerLink="/nurse" routerLinkActive="active">
+                    <i class="fa fa-user-md"></i> Nurse Dashboard
+                </a>
+            </li>
+            <li *ngIf="user?.role === 'patient'" class="nav-item">
+                <a class="nav-link" routerLink="/patient" routerLinkActive="active">
+                    <i class="fa fa-medkit"></i> Patient Dashboard
+                </a>
+            </li>
+            <li *ngIf="user?.role === 'patient'" class="nav-item">
+                <a class="nav-link" [routerLink]="['/biometrics', user.id]" routerLinkActive="active">
+                    <i class="fa fa-heartbeat"></i> My Biometrics
+                </a>
+            </li>
         </ul>
 
         <form class="form-inline my-2 my-lg-0">

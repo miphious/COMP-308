@@ -1,3 +1,22 @@
-<p>
-    patient-dashboard works!
-</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Hi {{ patient.firstName }}</h4>
+        </div>
+    </div>
+    <br>
+    <!--<div class="row" *ngIf="patient">-->
+        <!--<div class="col-md-12">-->
+            <!--<h4>Post Biometrics:</h4>-->
+            <!--<app-add-biometrics [patientId]="patient.id"-->
+                                <!--(biometricsPosted)="addNewBiometrics($event)"></app-add-biometrics>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<br>-->
+    <!--<div class="row" *ngIf="biometricsList?.length">-->
+        <!--<div class="col-md-12">-->
+            <!--<h4>Previous Biometrics:</h4>-->
+            <!--<app-biometrics-list [biometricsList]="biometricsList"></app-biometrics-list>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
