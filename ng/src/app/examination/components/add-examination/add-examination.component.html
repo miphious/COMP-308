@@ -1,0 +1,37 @@
+<form #addExamForm="ngForm" (submit)="submitExamination(addExamForm)">
+    <div class="form-row align-items-center">
+        <div class="form-group col-md-2">
+            <label for="bodyTemperature" class="sr-only">Body Temperature</label>
+            <input type="text" class="form-control" id="bodyTemperature" name="bodyTemperature"
+                   placeholder="Body Temperature" required [(ngModel)]="examination.bodyTemperature">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="heartRate" class="sr-only">Heart Rate</label>
+            <input type="text" class="form-control" id="heartRate" name="heartRate" placeholder="Heart Rate"
+                   required [(ngModel)]="examination.heartRate">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="bloodPressure" class="sr-only">Blood Pressure</label>
+            <input type="text" class="form-control" id="bloodPressure" name="bloodPressure" placeholder="Blood Pressure"
+                   required [(ngModel)]="examination.bloodPressure">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="respiratoryRate" class="sr-only">Respiratory Rate</label>
+            <input type="text" class="form-control" id="respiratoryRate" name="respiratoryRate"
+                   placeholder="Respiratory Rate" required [(ngModel)]="examination.respiratoryRate">
+        </div>
+        <div class="form-group col-md-1">
+            <button type="submit" class="btn btn-secondary" [disabled]="isSending || addExamForm.form.invalid">
+                <i class="fa fa-medkit"></i> Submit
+            </button>
+        </div>
+    </div>
+</form>
+
+<div class="row text-center">
+    <div class="alert alert-danger" *ngIf="error">
+        Operation Failed!
+        <br/>
+        <p> {{ error }} </p>
+    </div>
+</div>

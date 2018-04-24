@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row">
+    <div class="row" *ngIf="patient">
         <div class="col-md-12">
             <h4>Patient:</h4>
             <div *ngIf="patient" class="card">
@@ -12,6 +12,13 @@
                     <p class="card-text">Address: {{ patient.address }}</p>
                 </div>
             </div>
+        </div>
+    </div>
+    <br>
+    <div class="row" *ngIf="patient">
+        <div class="col-md-12">
+            <h4>Post a new examination:</h4>
+            <app-add-examination (examinationPosted)="addNewExamination($event)"></app-add-examination>
         </div>
     </div>
     <br>

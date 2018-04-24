@@ -56,4 +56,8 @@ export class PatientExaminationComponent implements OnInit {
                 }
             );
     }
+
+    addNewExamination(examination: Examination) {
+        this.examinations.push(examination);
+    }
 }
