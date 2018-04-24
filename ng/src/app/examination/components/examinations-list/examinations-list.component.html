@@ -1,3 +1,22 @@
-<p>
-  examinations-list works!
-</p>
+<table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">Body Temperature</th>
+        <th scope="col">Heart Rate</th>
+        <th scope="col">Blood Pressure</th>
+        <th scope="col">Respiratory Rate</th>
+        <th scope="col" class="text-center">By</th>
+        <th scope="col" class="text-center">Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let exam of examinations">
+        <td><span>{{ exam.bodyTemperature }}</span></td>
+        <td><span>{{ exam.heartRate }}</span></td>
+        <td><span>{{ exam.bloodPressure }}</span></td>
+        <td><span>{{ exam.respiratoryRate }}</span></td>
+        <td class="text-center"><span>{{ exam.patient === exam.postedBy ? 'Patient' : 'Nurse' }}</span></td>
+        <td class="text-center"><span>{{ exam.postedAt | date:'EEEE, MMM d, y, h:mm a' }}</span></td>
+    </tr>
+    </tbody>
+</table>

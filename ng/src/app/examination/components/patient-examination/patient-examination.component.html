@@ -1,6 +1,24 @@
-<p>
-    patient-examination works!
-</p>
-{{ patient | json }}
-<br>
-{{ examinations | json }}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Patient:</h4>
+            <div *ngIf="patient" class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ patient.firstName }} {{ patient.lastName }}
+                        <code>({{ patient.id }})</code>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ patient.email }}</h6>
+                    <p class="card-text">Address: {{ patient.address }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row" *ngIf="examinations?.length">
+        <div class="col-md-12">
+            <h4>Previous Examinations:</h4>
+            <app-examinations-list [examinations]="examinations"></app-examinations-list>
+        </div>
+    </div>
+</div>
