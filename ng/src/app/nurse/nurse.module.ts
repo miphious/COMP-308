@@ -5,7 +5,9 @@ import { NurseRoutingModule } from './nurse-routing.module';
 import { NurseDashboardComponent } from './component/nurse-dashboard/nurse-dashboard.component';
 import { PatientsListComponent } from './component/patients-list/patients-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PatientService } from './service/patient.service';
+import { PatientService } from '../shared/services/patient.service';
+import { PatientComponent } from './component/patient/patient.component';
+import { ExaminationsListComponent } from '../examination/components/examinations-list/examinations-list.component';
 
 @NgModule({
     imports: [
@@ -16,6 +18,7 @@ import { PatientService } from './service/patient.service';
     declarations: [
         NurseDashboardComponent,
         PatientsListComponent,
+        PatientComponent,
     ],
     providers: [
         PatientService,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PatientService } from '../../service/patient.service';
+import { PatientService } from '../../../shared/services/patient.service';
 import { Patient } from '../../../shared/models/patient';
 import { getErrorMessage } from '../../../shared/helpers/helpers';
 import { AuthService } from '../../../shared/services/auth.service';

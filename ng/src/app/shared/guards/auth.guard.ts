@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanLoad, Route } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanLoad {
     constructor(
         private _authService: AuthService,
         private _router: Router
@@ -19,5 +19,9 @@ export class AuthGuard implements CanActivate {
                     queryParams: {returnUrl: state.url}
                 });
         }
+    }
+
+    canLoad(route: Route): boolean {
+        return !!this._authService.user;
     }
 }

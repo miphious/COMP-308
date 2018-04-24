@@ -35,7 +35,7 @@ export class AuthService {
     login(login: { username: string, password: string }) {
         return this._http
             .post<User>('/api/login', login)
-            .do(student => {
+            .do<User>(student => {
                 this._currentUser = student;
                 this._authEventEmitter.emit('login', student);
             });

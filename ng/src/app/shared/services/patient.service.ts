@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Patient } from '../../shared/models/patient';
+import { Patient } from '../models/patient';
 
 @Injectable()
 export class PatientService {
@@ -12,6 +12,11 @@ export class PatientService {
     getAll() {
         return this._http
             .get<Patient[]>('/api/patients');
+    }
+
+    getById(patientId: string) {
+        return this._http
+            .get<Patient>(`/api/patients/${patientId}`);
     }
 
     registerWithPatient(nurseId: string, patientId: string) {

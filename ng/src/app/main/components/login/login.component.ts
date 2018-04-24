@@ -41,26 +41,14 @@ export class LoginComponent implements OnInit {
         this._authService
             .login(this.loginModel)
             .subscribe(
-                () => {
-                    this.navigateToDashboard();
+                user => {
+                    const nextRoute = this._returnUrl || user.role || '/home';
+                    this._router.navigate([nextRoute]);
                 },
                 e => {
                     this.error = getErrorMessage(e);
                     this.isSending = false;
                 }
             );
-    }
-
-    private async navigateToDashboard() {
-        this.isSending = true;
-        this.error = null;
-
-        let b: boolean;
-        try {
-            b = await this._router.navigate([this._returnUrl || '/home']);
-        } catch (e) {
-            this.error = getErrorMessage(e);
-            this.isSending = false;
-        }
     }
 }

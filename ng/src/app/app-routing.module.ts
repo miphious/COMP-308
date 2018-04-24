@@ -10,6 +10,7 @@ import { LoginComponent } from './main/components/login/login.component';
 import { RegisterComponent } from './main/components/register/register.component';
 import { ProfileComponent } from './main/components/profile/profile.component';
 import { ErrorComponent } from './main/components/error/error.component';
+import { SelectivePreloadingStrategy } from './selective-preloading-strategy';
 
 const routes: Routes = [
     {path: 'home', component: HomeComponent},
@@ -28,6 +29,12 @@ const routes: Routes = [
         canActivate: [AuthGuard, PatientGuard],
         canLoad: [PatientGuard]
     },
+    {
+        path: 'examinations',
+        loadChildren: 'app/examination/examination.module#ExaminationModule',
+        data: {preload: true},
+        canActivate: [AuthGuard]
+    },
     {path: 'error', component: ErrorComponent},
     {path: '', pathMatch: 'full', redirectTo: 'home'},
     {path: '**', component: ErrorComponent},
@@ -36,8 +43,9 @@ const routes: Routes = [
 @NgModule({
     imports: [
         SharedModule,
-        RouterModule.forRoot(routes),
+        RouterModule.forRoot(routes, {preloadingStrategy: SelectivePreloadingStrategy}),
     ],
+    providers: [SelectivePreloadingStrategy],
     exports: [RouterModule]
 })
 export class AppRoutingModule {

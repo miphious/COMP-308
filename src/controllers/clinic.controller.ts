@@ -47,12 +47,65 @@ export class ClinicController {
         res.send();
     }
 
+    public static async unregisterPatient(req: Request, res: Response, next: NextFunction) {
+        const patientId: string = req.query.patient;
+        const nurseId: string = req.query.nurse;
+
+        const User = getModelUser();
+
+        let patient: IUserModel;
+        let nurse: IUserModel;
+
+        try {
+            patient = await User.findOne({ _id: patientId, role: 'patient' });
+        } catch (e) {
+            return next(e);
+        }
+        if (!patient) {
+            res.status(404);
+            res.send(new ApiError('Patient not found'));
+            return;
+        }
+
+        try {
+            nurse = await User.findOne({ _id: nurseId, role: 'nurse' });
+        } catch (e) {
+            return next(e);
+        }
+        if (!nurse) {
+            res.status(404);
+            res.send(new ApiError('Nurse not found'));
+            return;
+        }
+
+        if (
+            nurse.associatedUsers.every(id => id.toString() !== patientId) ||
+            patient.associatedUsers.every(id => id.toString() !== nurseId)
+        ) {
+            res.status(404);
+            res.send(new ApiError('No such registration exists'));
+            return;
+        }
+
+        try {
+            await patient.update({ $pull: { associatedUsers: nurseId } });
+            await nurse.update({ $pull: { associatedUsers: patientId } });
+        } catch (e) {
+            return next(e);
+        }
+
+        res.statusCode = 204;
+        res.send();
+    }
+
     public static async getAllExaminations(req: Request, res: Response, next: NextFunction) {
+        const patientId: string = req.params.patientId;
+
         const Examination = getModelExamination();
         let exams: IExaminationModel[];
 
         try {
-            exams = await Examination.find({}, { __v: 0 });
+            exams = await Examination.find({ patient: patientId }, { __v: 0 });
         } catch (e) {
             return next(e);
         }

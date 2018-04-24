@@ -16,12 +16,16 @@
             <th scope="col">Email</th>
             <th scope="col">Address</th>
             <th scope="col" class="text-center">Nurses</th>
-            <th scope="col" class="text-center"><i class="fa fa-info"></i></th>
+            <th scope="col" class="text-center"></th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let p of patients">
-            <th scope="row"><span>{{ p.firstName }} {{ p.lastName }}</span></th>
+            <th scope="row">
+                <a [routerLink]="['/examinations', p.id]">
+                    {{ p.firstName }} {{ p.lastName }}
+                </a>
+            </th>
             <td><span>{{ p.email }}</span></td>
             <td><span>{{ p.address}}</span></td>
             <td class="text-center"><span>{{ p.nurses?.length || '-' }}</span></td>
