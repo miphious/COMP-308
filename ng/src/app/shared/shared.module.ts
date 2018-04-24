@@ -8,6 +8,7 @@ import { NurseGuard } from './guards/nurse.guard';
 import { PatientGuard } from './guards/patient.guard';
 import { PatientService } from './services/patient.service';
 import { DailyTipService } from './services/daily-tip.service';
+import { EmergencyAlertService } from './services/emergency-alert.service';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { DailyTipService } from './services/daily-tip.service';
         ErrorService,
         PatientService,
         DailyTipService,
+        EmergencyAlertService,
     ]
 })
 export class SharedModule {

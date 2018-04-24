@@ -28,5 +28,14 @@ export function registerClinicRoutes(router: Router) {
             ensureAuthenticated,
             ClinicController.addDailyTip
         )
+        .get('/api/clinic/emergency-alert',
+            ensureAuthenticated,
+            ClinicController.getEmergencyAlerts
+        )
+        .post('/api/clinic/emergency-alert',
+            ensureAuthenticated,
+            ClinicController.addEmergencyAlert
+        )
+
         ;
 }

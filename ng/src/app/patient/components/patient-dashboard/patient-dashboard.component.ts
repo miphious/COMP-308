@@ -5,6 +5,7 @@ import { getErrorMessage } from '../../../shared/helpers/helpers';
 import { AuthService } from '../../../shared/services/auth.service';
 import { DailyTipService } from '../../../shared/services/daily-tip.service';
 import { DailyTip } from '../../../shared/models/daily-tip';
+import { EmergencyAlertService } from '../../../shared/services/emergency-alert.service';
 
 @Component({
     selector: 'app-patient-dashboard',
@@ -18,6 +19,7 @@ export class PatientDashboardComponent implements OnInit {
     constructor(
         private _patientService: PatientService,
         private _dailyTipService: DailyTipService,
+        private _emergencyAlertService: EmergencyAlertService,
         private _authService: AuthService
     ) {
     }
@@ -47,6 +49,21 @@ export class PatientDashboardComponent implements OnInit {
             .subscribe(
                 tips => {
                     this.dailyTips = tips;
+                },
+                e => {
+                    this.error = getErrorMessage(e);
+                }
+            );
+    }
+
+    sendEmergencyAlert(event) {
+        const btn: HTMLButtonElement = event.target;
+        this._emergencyAlertService
+            .send()
+            .subscribe(
+                () => {
+                    btn.disabled = true;
+                    btn.innerText = 'Emergency alarm sent';
                 },
                 e => {
                     this.error = getErrorMessage(e);

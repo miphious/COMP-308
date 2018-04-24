@@ -3,6 +3,7 @@ import { IUserModel, getModelUser } from '../models/user.model';
 import { getModelBiometrics, IBiometricsModel } from '../models/biometrics.model';
 import { ApiError } from '../models/api-error';
 import { getModelDailyTip, IDailyTipModel } from '../models/daily-tip.model';
+import { getModelEmergencyAlert, IEmergencyAlertModel } from '../models/emergency-alert.model';
 
 export class ClinicController {
 
@@ -193,5 +194,32 @@ export class ClinicController {
 
         res.statusCode = 201;
         return res.json(newTip.toDTO());
+    }
+
+    public static async getEmergencyAlerts(req: Request, res: Response, next: NextFunction) {
+        const EmergencyAlert = getModelEmergencyAlert();
+        let alerts: IEmergencyAlertModel[];
+
+        try {
+            alerts = await EmergencyAlert.find({}, { __v: 0 });
+        } catch (e) {
+            return next(e);
+        }
+
+        res.json(alerts.map(s => s.toDTO()));
+    }
+
+    public static async addEmergencyAlert(req: Request, res: Response, next: NextFunction) {
+        const EmergencyAlert = getModelEmergencyAlert();
+        const alert = new EmergencyAlert({ patient: req.user.id, postedAt: new Date() });
+
+        try {
+            await alert.save();
+        } catch (e) {
+            return next(e);
+        }
+
+        res.statusCode = 201;
+        return res.json(alert.toDTO());
     }
 }
