@@ -18,7 +18,8 @@
     <div class="row" *ngIf="patient">
         <div class="col-md-12">
             <h4>Post Biometrics:</h4>
-            <app-add-biometrics (biometricsPosted)="addNewBiometrics($event)"></app-add-biometrics>
+            <app-add-biometrics [patientId]="patient.id"
+                                (biometricsPosted)="addNewBiometrics($event)"></app-add-biometrics>
         </div>
     </div>
     <br>

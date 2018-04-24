@@ -13,4 +13,9 @@ export class BiometricsService {
         return this._http
             .get<Biometrics[]>(`/api/clinic/biometrics/${patientId}`);
     }
+
+    add(biometrics: Biometrics) {
+        return this._http
+            .post<Biometrics>('/api/clinic/biometrics', biometrics);
+    }
 }

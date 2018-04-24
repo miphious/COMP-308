@@ -1,4 +1,4 @@
-<form #addExamForm="ngForm" (submit)="submitExamination(addExamForm)">
+<form #biometricsForm="ngForm" (submit)="submitBiometrics(biometricsForm)">
     <div class="form-row align-items-center">
         <div class="form-group col-md-2">
             <label for="bodyTemperature" class="sr-only">Body Temperature</label>
@@ -21,7 +21,7 @@
                    placeholder="Respiratory Rate" required [(ngModel)]="biometrics.respiratoryRate">
         </div>
         <div class="form-group col-md-1">
-            <button type="submit" class="btn btn-secondary" [disabled]="isSending || addExamForm.form.invalid">
+            <button type="submit" class="btn btn-secondary" [disabled]="isSending || biometricsForm.form.invalid">
                 <i class="fa fa-medkit"></i> Submit
             </button>
         </div>
