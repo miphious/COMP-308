@@ -77,7 +77,7 @@ export class PredictionComponent {
     }
 }
 
-function buildPredictions(rawPredictions): Object[] {
+function buildPredictions(rawPredictions): any[] {
     const predictions = [];
     for (const fieldName in rawPredictions) {
         if (!rawPredictions.hasOwnProperty(fieldName)) {
