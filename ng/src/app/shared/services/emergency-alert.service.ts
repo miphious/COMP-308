@@ -16,6 +16,6 @@ export class EmergencyAlertService {
 
     send() {
         return this._http
-            .post<EmergencyAlert>('/api/clinic/emergency-alert');
+            .post<EmergencyAlert>('/api/clinic/emergency-alert', null);
     }
 }
