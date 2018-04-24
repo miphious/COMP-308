@@ -226,21 +226,21 @@ export class ClinicController {
 
     public static async predict(req: Request, res: Response, next: NextFunction) {
         //read the new data
-        const fever = req.body.fever;
-        const diarrhea = req.body.diarrhea;
-        const muscleAches = req.body.muscleAches;
-        const coughing = req.body.coughing;
-        const severeHeadache = req.body.severeHeadache;
-        const fatigue = req.body.fatigue;
-        const visionProblems = req.body.visionProblems;
-        const chestPain = req.body.chestPain;
-        const difficultyBreathing = req.body.difficultyBreathing;
-        const irregularHeartbeat = req.body.irregularHeartbeat;
-        const chestDiscomfort = req.body.chestDiscomfort;
-        const nausea = req.body.nausea;
-        const indigestion = req.body.indigestion;
-        const heartburn = req.body.heartburn;
-        const stomachPain = req.body.stomachPain;
+        const fever = req.body.fever || 'no';
+        const diarrhea = req.body.diarrhea || 'no';
+        const muscleAches = req.body.muscleAches || 'no';
+        const coughing = req.body.coughing || 'no';
+        const severeHeadache = req.body.severeHeadache || 'no';
+        const fatigue = req.body.fatigue || 'no';
+        const visionProblems = req.body.visionProblems || 'no';
+        const chestPain = req.body.chestPain || 'no';
+        const difficultyBreathing = req.body.difficultyBreathing || 'no';
+        const irregularHeartbeat = req.body.irregularHeartbeat || 'no';
+        const chestDiscomfort = req.body.chestDiscomfort || 'no';
+        const nausea = req.body.nausea || 'no';
+        const indigestion = req.body.indigestion || 'no';
+        const heartburn = req.body.heartburn || 'no';
+        const stomachPain = req.body.stomachPain || 'no';
         const age = req.body.age;
         const days = req.body.days;
 
@@ -306,7 +306,6 @@ export class ClinicController {
         dt.build();
 
         //classify new data using this Decision Tree
-        console.log("Classify : ", dt.classify([fever, diarrhea, muscleAches, coughing, severeHeadache, fatigue, visionProblems, chestPain, difficultyBreathing, irregularHeartbeat, chestDiscomfort, nausea, indigestion, heartburn, stomachPain, age, days]));
         const classificationResult = dt.classify([fever, diarrhea, muscleAches, coughing, severeHeadache, fatigue, visionProblems, chestPain, difficultyBreathing, irregularHeartbeat, chestDiscomfort, nausea, indigestion, heartburn, stomachPain, age, days])
         const tree = dt.getTree();
 
