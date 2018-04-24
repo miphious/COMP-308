@@ -1,0 +1,158 @@
+<form [formGroup]="predictionsForm" (submit)="submitBiometrics()">
+    <div class="form-row">
+        <div class="form-group col-md-1">
+            <label for="fever">Fever</label>
+            <select class="form-control" id="fever" formControlName="fever">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-1">
+            <label for="diarrhea">Diarrhea</label>
+            <select class="form-control" id="diarrhea" formControlName="diarrhea">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="muscleAches">Muscle Aches</label>
+            <select class="form-control" id="muscleAches" formControlName="muscleAches">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="coughing">Coughing</label>
+            <select class="form-control" id="coughing" formControlName="coughing">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="severeHeadache">Severe Headache</label>
+            <select class="form-control" id="severeHeadache" formControlName="severeHeadache">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-1">
+            <label for="fatigue">Fatigue</label>
+            <select class="form-control" id="fatigue" formControlName="fatigue">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="visionProblems">Vision Problems</label>
+            <select class="form-control" id="visionProblems" formControlName="visionProblems">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-1">
+            <label for="nausea">Nausea</label>
+            <select class="form-control" id="nausea" formControlName="nausea">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="chestPain">Chest Pain</label>
+            <select class="form-control" id="chestPain" formControlName="chestPain">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="difficultyBreathing">Difficulty Breathing</label>
+            <select class="form-control" id="difficultyBreathing" formControlName="difficultyBreathing">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="irregularHeartbeat">Irregular Heartbeat</label>
+            <select class="form-control" id="irregularHeartbeat" formControlName="irregularHeartbeat">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="chestDiscomfort">Chest Discomfort</label>
+            <select class="form-control" id="chestDiscomfort" formControlName="chestDiscomfort">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="indigestion">Indigestion</label>
+            <select class="form-control" id="indigestion" formControlName="indigestion">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="stomachPain">Stomach Pain</label>
+            <select class="form-control" id="stomachPain" formControlName="stomachPain">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="heartburn">Heartburn</label>
+            <select class="form-control" id="heartburn" formControlName="heartburn">
+                <option></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" id="age" placeholder="Age" formControlName="age">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="days">Number of days</label>
+            <input type="number" class="form-control" id="days" placeholder="Days having issues" formControlName="days">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary pull-right"
+            [disabled]="isSending || predictionsForm.pristine || predictionsForm.invalid">
+        <i class="fa fa-stethoscope"></i> Submit
+    </button>
+</form>
+
+<br>
+
+<div class="row text-center">
+    <div class="alert alert-danger" *ngIf="error">
+        Operation Failed!
+        <br/>
+        <p> {{ error }} </p>
+    </div>
+    <br>
+</div>
+
+<ul *ngIf="predictions?.length">
+    <li *ngFor="let p of predictions">{{ p.name }} ({{ p.value }})</li>
+</ul>

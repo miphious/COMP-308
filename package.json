@@ -17,6 +17,7 @@
         "cookie-parser": "^1.4.3",
         "express": "^4.16.3",
         "express-session": "^1.15.6",
+        "machine_learning": "^0.1.1",
         "mongoose": "^5.0.7",
         "morgan": "^1.7.35",
         "passport": "^0.4.0",

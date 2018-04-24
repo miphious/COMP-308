@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+const MachineLearning = require('machine_learning');
 import { IUserModel, getModelUser } from '../models/user.model';
 import { getModelBiometrics, IBiometricsModel } from '../models/biometrics.model';
 import { ApiError } from '../models/api-error';
@@ -221,5 +222,106 @@ export class ClinicController {
 
         res.statusCode = 201;
         return res.json(alert.toDTO());
+    }
+
+    public static async predict(req: Request, res: Response, next: NextFunction) {
+        //read the new data
+        const fever = req.body.fever;
+        const diarrhea = req.body.diarrhea;
+        const muscleAches = req.body.muscleAches;
+        const coughing = req.body.coughing;
+        const severeHeadache = req.body.severeHeadache;
+        const fatigue = req.body.fatigue;
+        const visionProblems = req.body.visionProblems;
+        const chestPain = req.body.chestPain;
+        const difficultyBreathing = req.body.difficultyBreathing;
+        const irregularHeartbeat = req.body.irregularHeartbeat;
+        const chestDiscomfort = req.body.chestDiscomfort;
+        const nausea = req.body.nausea;
+        const indigestion = req.body.indigestion;
+        const heartburn = req.body.heartburn;
+        const stomachPain = req.body.stomachPain;
+        const age = req.body.age;
+        const days = req.body.days;
+
+        // Predicting influenza
+        //fever, diarrhea, muscleAches, coughing, severeHeadache, Fatigue, visionProblems, chestPain, difficultyBreathing, irregularHeartbeat, chestDiscomfort, nausea, indigestion, heartburn, stomachPain
+        const data =
+            [
+                ['yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 60, 5],
+                ['yes', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 30, 6],
+                ['yes', 'no', 'yes', 'yes', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 40, 7],
+                ['yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 20, 2],
+                ['yes', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 30, 3],
+                ['no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 20, 7],
+
+                ['yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 60, 1],
+                ['yes', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 30, 2],
+                ['yes', 'no', 'yes', 'yes', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 40, 2],
+                ['yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 20, 1],
+                ['yes', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 30, 4],
+                ['no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 20, 2],
+
+                ['no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 40, 10],
+                ['no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 30, 15],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 20, 20],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 38, 25],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 60, 30],
+
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 70, 5],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'yes', 'no', 55, 3],
+                ['no', 'no', 'no', 'no', 'yes', 'no', 'yes', 'no', 'no', 'yes', 'no', 'yes', 'no', 'yes', 'no', 35, 7],
+                ['no', 'no', 'no', 'no', 'yes', 'no', 'yes', 'no', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 40, 6],
+                ['no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'yes', 'yes', 'no', 'yes', 'yes', 'yes', 'no', 65, 4],
+
+                ['no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'yes', 'yes', 'no', 'yes', 'yes', 'yes', 'no', 75, 15],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 25, 20],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 33, 30],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 45, 25],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 33, 13],
+
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 45, 2],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 65, 3],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 33, 5],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 45, 7],
+                ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 65, 10]
+            ];
+
+        //decision made
+        const result = [
+            'Influenza+See a doctor', 'Influenza+See a doctor', 'Influenza+See a doctor', 'Cold+Stay warm', 'Influenza+See a doctor', 'Cold+See a doctor',
+            'Might be Influenza+See a doctor if longer', 'Might be Influenza+See a doctor if longer', 'Might be Influenza+See a doctor if longer', 'Cold+Stay warm', 'Might be Influenza+See a doctor if longer', 'Cold+Stay warm',
+            'HeartDisease+See a doctor', 'HeartDisease+See a doctor', 'HeartDisease+See a doctor', 'HeartDisease+See a doctor', 'HeartDisease+See a doctor',
+            'Might be HeartDisease+See a doctor if longer', 'Might be HeartDisease+See a doctor if longer', 'Might be Hypertension+See a doctor if longer', 'Might be Hypertension+See a doctor if longer', 'Might be Hypertension+See a doctor if longer',
+            'Acidity+See a doctor', 'Acidity+See a doctor', 'Acidity + See a doctor', 'Acidity+See a doctor', 'Acidity+See a doctor',
+            'Might be Acidity+See a doctor if longer', 'Might be Acidity+See a doctor if longer', 'Might be Acidity+See a doctor if longer', 'Might be Acidity+See a doctor if longer', 'Might be Acidity+See a doctor if longer'
+        ];
+
+        //create new Decision Tree using this dataset
+        const dt = new MachineLearning.DecisionTree({
+            data: data,
+            result: result
+        });
+
+        dt.build();
+
+        //classify new data using this Decision Tree
+        console.log("Classify : ", dt.classify([fever, diarrhea, muscleAches, coughing, severeHeadache, fatigue, visionProblems, chestPain, difficultyBreathing, irregularHeartbeat, chestDiscomfort, nausea, indigestion, heartburn, stomachPain, age, days]));
+        const classificationResult = dt.classify([fever, diarrhea, muscleAches, coughing, severeHeadache, fatigue, visionProblems, chestPain, difficultyBreathing, irregularHeartbeat, chestDiscomfort, nausea, indigestion, heartburn, stomachPain, age, days])
+        const tree = dt.getTree();
+
+        //Pruning Decision Tree is recommended to avoid overfitting
+        // Decision Tree in this library uses simple pruning algorithm
+        // which merges two branches of Decision Tree
+        // when entropy loss of merging the two branches
+        // is smaller than mingain value.
+        dt.prune(1.0); // 1.0 : mingain.
+
+        // Use the 'response' object to render the 'index' view with a 'title' property
+        // res.render('./results.ejs', {
+        //     classificationResult: JSON.stringify(classificationResult),
+        //     tree: tree
+        // }
+        res.json(classificationResult);
     }
 }

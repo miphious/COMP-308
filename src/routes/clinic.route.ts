@@ -36,6 +36,9 @@ export function registerClinicRoutes(router: Router) {
             ensureAuthenticated,
             ClinicController.addEmergencyAlert
         )
-
+        .post('/api/clinic/predictions',
+            ensureAuthenticated,
+            ClinicController.predict
+        )
         ;
 }
