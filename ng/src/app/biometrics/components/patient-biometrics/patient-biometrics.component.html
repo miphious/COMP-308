@@ -15,6 +15,13 @@
         </div>
     </div>
     <br>
+    <div class="row" *ngIf="isCurrentUserNurse && patient">
+        <div class="col-md-12">
+            <h4>Post Daily Tip:</h4>
+            <app-add-daily-tip [patientId]="patient.id"></app-add-daily-tip>
+        </div>
+    </div>
+    <br>
     <div class="row" *ngIf="patient">
         <div class="col-md-12">
             <h4>Post Biometrics:</h4>

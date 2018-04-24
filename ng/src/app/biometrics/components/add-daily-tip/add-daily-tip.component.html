@@ -1,0 +1,27 @@
+<form #dailyTipForm="ngForm" (submit)="submitDailyTip(dailyTipForm)">
+    <div class="form-row align-items-center">
+        <div class="form-group col-md-8">
+            <label for="tip" class="sr-only">Daily Tip Text</label>
+            <input type="text" class="form-control" id="tip" name="text"
+                   placeholder="Daily tip text" required [(ngModel)]="dailyTip.text">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="link" class="sr-only">Daily Tip Link</label>
+            <input type="text" class="form-control" id="link" name="link"
+                   placeholder="Optional link for video, game, etc." [(ngModel)]="dailyTip.link">
+        </div>
+        <div class="form-group col-md-1">
+            <button type="submit" class="btn btn-warning" [disabled]="isSending || dailyTipForm.form.invalid">
+                <i class="fa fa-ticket"></i> Submit
+            </button>
+        </div>
+    </div>
+</form>
+
+<div class="row text-center">
+    <div class="alert alert-danger" *ngIf="error">
+        Operation Failed!
+        <br/>
+        <p> {{ error }} </p>
+    </div>
+</div>

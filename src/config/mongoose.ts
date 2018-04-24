@@ -2,6 +2,7 @@ import * as mongoose from 'mongoose';
 import { loadAppConfigurations } from './app-config';
 import { registerModelUser } from '../models/user.model';
 import { registerModelBiometrics } from '../models/biometrics.model';
+import { registerModelDailyTip } from '../models/daily-tip.model';
 
 export async function configureMongoose() {
     const appConfig = loadAppConfigurations();
@@ -9,6 +10,7 @@ export async function configureMongoose() {
 
     registerModelUser();
     registerModelBiometrics();
+    registerModelDailyTip();
 
     return db;
 }

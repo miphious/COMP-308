@@ -20,5 +20,13 @@ export function registerClinicRoutes(router: Router) {
             ensureAuthenticated,
             ClinicController.addBiometrics
         )
+        .get('/api/clinic/daily-tips/:patientId',
+            ensureAuthenticated,
+            ClinicController.getDailyTips
+        )
+        .post('/api/clinic/daily-tips',
+            ensureAuthenticated,
+            ClinicController.addDailyTip
+        )
         ;
 }

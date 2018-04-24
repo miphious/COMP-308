@@ -5,6 +5,7 @@ import { getErrorMessage } from '../../../shared/helpers/helpers';
 import { Patient } from '../../../shared/models/patient';
 import { BiometricsService } from '../../services/biometrics.service';
 import { Biometrics } from '../../models/biometrics';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
     selector: 'app-patient-biometrics',
@@ -13,16 +14,19 @@ import { Biometrics } from '../../models/biometrics';
 export class PatientBiometricsComponent implements OnInit {
     patient: Patient;
     biometricsList: Biometrics[];
+    isCurrentUserNurse: boolean;
     error: string;
 
     constructor(
         private _patientService: PatientService,
         private _biometricsService: BiometricsService,
+        private _authService: AuthService,
         private _route: ActivatedRoute
     ) {
     }
 
     ngOnInit() {
+        this.isCurrentUserNurse = this._authService.user.role === 'nurse';
         this._route.paramMap
             .subscribe(p => {
                 const patientId = p.get('patientId');

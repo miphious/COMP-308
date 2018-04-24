@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -7,21 +7,27 @@ import { AuthGuard } from './guards/auth.guard';
 import { NurseGuard } from './guards/nurse.guard';
 import { PatientGuard } from './guards/patient.guard';
 import { PatientService } from './services/patient.service';
+import { DailyTipService } from './services/daily-tip.service';
 
 @NgModule({
     imports: [
         CommonModule,
         HttpClientModule,
     ],
-    declarations: [],
     providers: [
         AuthGuard,
         NurseGuard,
         PatientGuard,
         ErrorService,
-        AuthService,
         PatientService,
+        DailyTipService,
     ]
 })
 export class SharedModule {
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: SharedModule,
+            providers: [AuthService]
+        };
+    }
 }
