@@ -89,7 +89,7 @@ node build.js
 node bin/www.js
 ```
 
-### Heorku
+### Heroku
 
 App is ready to be deployed on [Heroku](https://www.heroku.com). Add the following environment variables in application settings:
 
