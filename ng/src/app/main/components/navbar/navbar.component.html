@@ -1,18 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary text-white fixed-top">
-        <a class="navbar-brand js-scroll-trigger" routerLink="/home">MyClinic 
+<div class="sidenav">
+        
+    <a class="navbar-brand js-scroll-trigger" routerLink="/home">MyClinic 
               </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div  id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link font-weight-bold" routerLink="/home" routerLinkActive="active">
-                     Home
-                </a>
-            </li>
+
             <li *ngIf="user?.role === 'nurse'" class="nav-item">
                 <a class="nav-link font-weight-bold" routerLink="/nurse" routerLinkActive="active">
                     Nurse Dashboard
@@ -31,9 +28,9 @@
             
         </ul>
 
-        <form class="form-inline my-2 my-lg-0">
+        <div>
             <div *ngIf="user">
-                <a role="button" class="btn btn-outline-dark" routerLink="/profile" routerLinkActive="active">
+                <a class="nav-link font-weight-bold" routerLink="/profile" routerLinkActive="active">
                     Profile
                 </a>
                 <button role="button" class="btn btn-outline-warning" (click)="logout()">
@@ -42,15 +39,15 @@
             </div>
 
             <div *ngIf="!user">
-                <a role="button" class="btn btn-outline-info" routerLink="/login" routerLinkActive="active">
+                <a  class="nav-link font-weight-bold" routerLink="/login" routerLinkActive="active">
                     Login
                 </a>
-                <a role="button" class="btn btn-outline-success" routerLink="/register" routerLinkActive="active">
+                <a  class="nav-link font-weight-bold" routerLink="/register" routerLinkActive="active">
                     Register
                 </a>
             </div>
 
-        </form>
+        </div>
 
     </div>
-</nav>
+</div>
