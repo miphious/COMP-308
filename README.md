@@ -1,6 +1,6 @@
 # COMP 308 Project
 
-[Demo on Heorku](https://comp-308.herokuapp.com)
+[Demo on Heorku](https://comp-308-mean.herokuapp.com)
 
 ## Getting Started
 
@@ -8,11 +8,6 @@
 
 Run Mongo DB. Express app connects to `comp308-project` database [by default](./src/config/env/development.ts).
 
-If you use Docker, you can run the following container:
-
-```bash
-docker run --detach --publish 27017:27017 --name mongo-comp308 mongo
-```
 
 ### Express Web Server
 
@@ -60,34 +55,12 @@ If you use Visual Studio Code, there are [configurations](./.vscode/) to help yo
 
 ### Angular
 
-#### Debug Angular in VS Code
-
-If you use Visual Studio Code, there are [configurations](./ng/.vscode/) to help you with debugging the app.
-
-1. Open directory [`ng/`](./ng/) in VS Code
-1. Install [Debugger for Chrome extension](https://github.com/Microsoft/vscode-chrome-debug)
-1. Press `Ctrl + Shift + B` (Run Default Build Task) to run `ng serve` in background
-1. Press F5 to debug
-
 ## Configurations
 
 Mongo Db connection string could be set in [config files](./src/config/env) or as `APP_MONGO` environment variable.
 
 > If an app configuration is available both in a file and as environment variable, environment variable wins.
 
-## Deployment
-
-The [`build.js`](./build.js) script is used to build the app for production.
-
-Script builds Express app and places files in `dist/`. It then builds Angular app and places the files in `dist/public/`. Express serves them as static files.
-
-```bash
-# build both apps. output files to dist/
-node build.js
-
-# run production build
-node bin/www.js
-```
 
 ### Heorku
 
