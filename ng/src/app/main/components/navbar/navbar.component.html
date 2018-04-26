@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" routerLink="/home">
-        <img src="assets/images/bear.svg" width="40" height="40" alt="Logo">
-        Centennial Clinic
+        
+        MyClinic
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" routerLink="/home" routerLinkActive="active">
                     <i class="fa fa-home"></i> Home
                 </a>
@@ -27,16 +27,17 @@
             </li>
             <li *ngIf="user?.role === 'patient'" class="nav-item">
                 <a class="nav-link" [routerLink]="['/biometrics', user.id]" routerLinkActive="active">
-                    <i class="fa fa-heartbeat"></i> My Biometrics
+                    <i class="fa fa-heartbeat"></i> My Information
                 </a>
             </li>
+            
         </ul>
 
         <form class="form-inline my-2 my-lg-0">
             <div *ngIf="user">
                 <a role="button" class="btn btn-outline-dark" routerLink="/profile" routerLinkActive="active">
                     <i class="fa fa-user-circle"></i>
-                    My Profile
+                    Profile
                 </a>
                 <button role="button" class="btn btn-outline-danger" (click)="logout()">
                     <i class="fa fa-sign-out"></i>

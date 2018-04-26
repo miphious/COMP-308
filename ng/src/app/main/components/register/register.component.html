@@ -1,3 +1,4 @@
+<div class="mx-auto mt-5 p-3 border rounded col-xs-10 col-sm-8 col-md-6 col-lg-4 col-xl-4">
 <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
     <div class="form-row">
         <div class="form-group col-md-4">
@@ -29,13 +30,13 @@
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="role">Role</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" id="role_patient" value="patient" formControlName="role">
-                <label class="form-check-label" for="role_patient">Patient</label>
+            <div class="custom-control custom-radio">
+                <input class="custom-control-input" type="radio" id="role_patient" value="patient" formControlName="role">
+                <label class="custom-control-label" for="role_patient">Patient</label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" id="role_nurse" value="nurse" formControlName="role">
-                <label class="form-check-label" for="role_nurse">Nurse</label>
+            <div class="custom-control custom-radio">
+                <input class="custom-control-input" type="radio" id="role_nurse" value="nurse" formControlName="role">
+                <label class="custom-control-label" for="role_nurse">Nurse</label>
             </div>
         </div>
         <div class="form-group col-md-8">
@@ -44,18 +45,24 @@
                    formControlName="address">
         </div>
     </div>
-
-    <button type="submit" class="btn btn-outline-success pull-right"
-            [disabled]="isSending || registrationForm.pristine || registrationForm.invalid">
-        <i class="fa fa-user-plus"></i>
-        Register
-    </button>
+    <div class="form-row">
+            <div class="form-group col-md-8">
+                <button type="submit" class="btn btn-outline-success pull-right"
+                    [disabled]="isSending || registrationForm.pristine || registrationForm.invalid">
+                    <i class="fa fa-user-plus"></i>
+                    Register
+                </button>
+            </div>
+    </div>
 </form>
 
+
 <div class="row text-center">
+    
     <div class="alert alert-danger" *ngIf="error">
         Operation Failed!
         <br/>
         <p> {{ error }} </p>
     </div>
+</div>
 </div>
