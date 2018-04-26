@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-secondary bg-secondary text-white">
     <a class="navbar-brand" routerLink="/home">
         
         MyClinic
@@ -36,7 +36,6 @@
         <form class="form-inline my-2 my-lg-0">
             <div *ngIf="user">
                 <a role="button" class="btn btn-outline-dark" routerLink="/profile" routerLinkActive="active">
-                    <i class="fa fa-user-circle"></i>
                     Profile
                 </a>
                 <button role="button" class="btn btn-outline-warning" (click)="logout()">
