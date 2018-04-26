@@ -11,22 +11,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" routerLink="/home" routerLinkActive="active">
+                <a class="nav-link font-weight-bold" routerLink="/home" routerLinkActive="active">
                      Home
                 </a>
             </li>
             <li *ngIf="user?.role === 'nurse'" class="nav-item">
-                <a class="nav-link" routerLink="/nurse" routerLinkActive="active">
+                <a class="nav-link font-weight-bold" routerLink="/nurse" routerLinkActive="active">
                     Nurse Dashboard
                 </a>
             </li>
             <li *ngIf="user?.role === 'patient'" class="nav-item">
-                <a class="nav-link" routerLink="/patient" routerLinkActive="active">
+                <a class="nav-link font-weight-bold" routerLink="/patient" routerLinkActive="active">
                    Patient Dashboard
                 </a>
             </li>
             <li *ngIf="user?.role === 'patient'" class="nav-item">
-                <a class="nav-link" [routerLink]="['/biometrics', user.id]" routerLinkActive="active">
+                <a class="nav-link font-weight-bold" [routerLink]="['/biometrics', user.id]" routerLinkActive="active">
                      My Information
                 </a>
             </li>
