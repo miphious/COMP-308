@@ -1,15 +1,19 @@
-<div class="mx-auto mt-5 p-3 border rounded col-xs-10 col-sm-8 col-md-6 col-lg-4 col-xl-4">
+<div class="mx-auto mt-5 p-5 border border-primary rounded col-xs-10 col-sm-8 col-md-6 col-lg-4 col-xl-4">
 <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
     <div class="form-row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-8">
             <label for="firstName">First Name</label>
             <input type="text" class="form-control" id="firstName" placeholder="e.g. John" formControlName="firstName">
         </div>
-        <div class="form-group col-md-4">
+    </div>    
+    <div class="form-row">
+        <div class="form-group col-md-8">
             <label for="lastName">Last Name</label>
             <input type="text" class="form-control" id="lastName" placeholder="e.g. Smith" formControlName="lastName">
         </div>
-        <div class="form-group col-md-4">
+        </div>
+        <div class="form-row">
+        <div class="form-group col-md-8">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" placeholder="e.g. john.smith@example.com"
                    formControlName="email">
@@ -17,11 +21,13 @@
     </div>
 
     <div class="form-row" formGroupName="passwords">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-8">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" formControlName="password">
         </div>
-        <div class="form-group col-md-6">
+        </div>
+        <div class="form-row" formGroupName="passwords">
+        <div class="form-group col-md-8">
             <label for="passwordConfirm">Confirm Password</label>
             <input type="password" class="form-control" id="passwordConfirm" formControlName="passwordConfirm">
         </div>
