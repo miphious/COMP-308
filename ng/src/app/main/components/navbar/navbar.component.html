@@ -12,22 +12,22 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" routerLink="/home" routerLinkActive="active">
-                    <i class="fa fa-home"></i> Home
+                     Home
                 </a>
             </li>
             <li *ngIf="user?.role === 'nurse'" class="nav-item">
                 <a class="nav-link" routerLink="/nurse" routerLinkActive="active">
-                    <i class="fa fa-user-md"></i> Nurse Dashboard
+                    Nurse Dashboard
                 </a>
             </li>
             <li *ngIf="user?.role === 'patient'" class="nav-item">
                 <a class="nav-link" routerLink="/patient" routerLinkActive="active">
-                    <i class="fa fa-medkit"></i> Patient Dashboard
+                   Patient Dashboard
                 </a>
             </li>
             <li *ngIf="user?.role === 'patient'" class="nav-item">
                 <a class="nav-link" [routerLink]="['/biometrics', user.id]" routerLinkActive="active">
-                    <i class="fa fa-heartbeat"></i> My Information
+                     My Information
                 </a>
             </li>
             
@@ -39,19 +39,16 @@
                     <i class="fa fa-user-circle"></i>
                     Profile
                 </a>
-                <button role="button" class="btn btn-outline-danger" (click)="logout()">
-                    <i class="fa fa-sign-out"></i>
+                <button role="button" class="btn btn-outline-warning" (click)="logout()">
                     Logout
                 </button>
             </div>
 
             <div *ngIf="!user">
-                <a role="button" class="btn btn-outline-primary" routerLink="/login" routerLinkActive="active">
-                    <i class="fa fa-sign-in"></i>
+                <a role="button" class="btn btn-outline-info" routerLink="/login" routerLinkActive="active">
                     Login
                 </a>
                 <a role="button" class="btn btn-outline-success" routerLink="/register" routerLinkActive="active">
-                    <i class="fa fa-user-plus"></i>
                     Register
                 </a>
             </div>
